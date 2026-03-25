@@ -272,8 +272,8 @@
 
         <div class="countdown-container">
             <div class="countdown-label">COUNTDOWN UNTIL START DATE</div>
-            <span id="countdownTimer"></span>
-            <p class="countdown-note">[This is a tentative start date and may be subject to change in the coming days, follow IG to stay up to date]</p>
+            <span id="countdownTimer">$TBD</span> <!-- Changed to display $TBD -->
+            <p class="countdown-note">[The specific start date is still being finalized and will be decided soon. Follow IG to stay up to date.]</p>
         </div>
     </header>
 
@@ -345,7 +345,7 @@
             }, 28);
         }
 
-        // Countdown function
+        // Countdown function (kept for future use)
         function updateCountdown() {
             const startDate = new Date('May 1, 2026 00:00:00 GMT-0600'); // May 1st, 2026, 00:00:00 in UTC-6
             const now = new Date();
@@ -369,9 +369,8 @@
         window.onload = () => {
             // animatePrize(); // Commented out to keep prize as TBD
             
-            // Initial call and then update every second
-            updateCountdown();
-            setInterval(updateCountdown, 1000);
+            // updateCountdown(); // Commented out to keep countdown as TBD
+            // setInterval(updateCountdown, 1000); // Commented out
 
             // Smooth scrolling
             document.querySelectorAll('nav a[href^="#"]').forEach(link => {
