@@ -192,6 +192,70 @@
             text-shadow: 3px 3px 0 #000;
         }
 
+        /* Announcement Card Styling */
+        .announcement-card {
+            background-color: rgba(0, 119, 182, 0.75);
+            border-radius: 25px;
+            margin-bottom: 30px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            max-width: 600px; /* Constrain width for tweet-like appearance */
+            margin-left: auto;
+            margin-right: auto;
+            text-align: left; /* Align tweet content left */
+        }
+
+        .tweet-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .tweet-pfp {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            margin-right: 12px;
+            border: 2px solid white; /* Small border for pop */
+        }
+
+        .tweet-info {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: white;
+        }
+
+        .verified-badge {
+            width: 18px;
+            height: 18px;
+            margin-left: 8px;
+            fill: var(--water-blue); /* Blue for verified check */
+            vertical-align: middle;
+        }
+
+        .admin-tag {
+            background-color: rgba(255,255,255,0.2);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-size: 0.75rem;
+            font-weight: normal;
+            margin-left: 8px;
+            line-height: 1; /* Adjust line height to prevent extra space */
+            vertical-align: middle;
+        }
+
+        .tweet-content {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .tweet-content p {
+            margin-bottom: 10px; /* Space between paragraphs in the tweet */
+        }
+
         /* Generic placeholder for rules/signup */
         .section-placeholder {
             padding: 40px;
@@ -288,12 +352,34 @@
     <nav>
         <ul>
             <li><a href="#home">Home</a></li>
+            <li><a href="#announcements">Announcements</a></li>
             <li><a href="#rules">Rules</a></li>
             <li><a href="#signup">Signup</a></li>
             <li><a href="#feed">IG Feed</a></li>
             <li><a href="https://www.instagram.com/chs.srassassin26/" target="_blank">Follow IG</a></li>
         </ul>
     </nav>
+
+    <section id="announcements">
+        <h2>ANNOUNCEMENTS</h2>
+        <div class="announcement-card">
+            <div class="tweet-header">
+                <!-- Updated with the provided Instagram PFP URL -->
+                <img src="https://instagram.fyyc3-1.fna.fbcdn.net/v/t51.82787-19/582086772_17951647944060497_9221629917420091973_n.jpg?stp=dst-jpg_s320x320_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=instagram.fyyc3-1.fna.fbcdn.net&_nc_cat=105&_nc_oc=Q6cZ2gFNa8NXelqu91XvzIIwZhecED8m0cVK6OYjOynwfanwINEGAf49cXW_eH0IH2IgK20&_nc_ohc=8Vlb_1CcugYQ7kNvwGRm_5g&_nc_gid=1TfSxG5s5-zyLAONvIcN9g&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfzyvBwa0vLtoewY-FpZBHlY_MombnwHC5GNqPDrDiTOCA&oe=69C96696&_nc_sid=8b3546" alt="Henry Fransoo" class="tweet-pfp">
+                <div class="tweet-info">
+                    Henry Fransoo
+                    <svg class="verified-badge" viewBox="0 0 24 24" aria-label="Verified account">
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                    </svg>
+                    <span class="admin-tag">Admin</span>
+                </div>
+            </div>
+            <div class="tweet-content">
+                <p>I just spent 3 hours making this site, this better be working bruh</p>
+                <p>Keep eyes out for stories on the Instagram page, will be posting votes there for the rules of the game soon (start date, groups, safe zones, etc.)</p>
+            </div>
+        </div>
+    </section>
 
     <section id="rules">
         <h2>GAME RULES</h2>
