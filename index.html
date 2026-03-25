@@ -20,7 +20,7 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #0077b6; /* Changed to a solid blue for the base */
+            background-color: #0077b6; /* Solid blue base */
             color: white;
             min-height: 100vh;
             overflow-x: hidden;
@@ -29,25 +29,26 @@
 
         /* Playful repeating emoji background */
         body::before {
-            content: ""; /* Content moved to background-image */
+            content: "";
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Ctext x='0' y='25' font-size='2.8rem' opacity='0.7' fill='rgba(255,255,255,1)'%3E%F0%9F%92%A6%F0%9F%94%AB%3C/text%3E%3C/svg%3E"); /* Water gun and splash emoji */
-            background-repeat: repeat; /* Repeat the pattern */
-            background-size: 100px 100px; /* Size of each emoji repeat */
-            opacity: 0.15; /* Increased opacity for clear visibility */
+            /* Using a data URI for the emojis to repeat them in a pattern */
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Ctext x='0' y='25' font-size='2.8rem' opacity='0.7' fill='rgba(255,255,255,1)'%3E%F0%9F%92%A6%3C/text%3E%3Ctext x='50' y='75' font-size='2.8rem' opacity='0.7' fill='rgba(255,255,255,1)'%3E%F0%9F%94%AB%3C/text%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 100px 100px; /* Size of the pattern unit */
+            opacity: 0.12; /* Slightly transparent blue, visible emojis */
             pointer-events: none;
             z-index: -1;
-            /* Animation can be added here if desired, but for clear "as day" emojis, a fixed background is better */
-            /* animation: emojiFloat 35s linear infinite; */
+            /* Animation for the emojis */
+            animation: emojiFloat 35s linear infinite;
         }
 
         @keyframes emojiFloat {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            100% { transform: translate(80px, 80px) rotate(8deg); } /* Original animation, commented out for clarity */
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(80px, 80px); } /* Subtle movement */
         }
 
         header {
@@ -77,8 +78,8 @@
 
         /* Prize Pool */
         .prize-container {
-            background: rgba(255,255,255,0.2);
-            backdrop-filter: blur(15px);
+            background: rgba(255,255,255,0.2); /* Keep background slightly transparent */
+            /* backdrop-filter: blur(15px); Removed blur for more solidity */
             border: 5px solid var(--sun-yellow);
             border-radius: 25px;
             padding: 25px 30px;
@@ -151,7 +152,7 @@
 
         /* Rules */
         #rules {
-            background: rgba(255,255,255,0.15);
+            background-color: #0077b6; /* Solid background for this section */
             border-radius: 25px;
         }
 
@@ -165,7 +166,7 @@
 
         /* Instagram Embed Section */
         #feed {
-            background: rgba(255,255,255,0.12);
+            background-color: #0077b6; /* Solid background for this section */
             border-radius: 25px;
             padding: 30px 20px;
         }
