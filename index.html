@@ -79,7 +79,6 @@
         /* Prize Pool */
         .prize-container {
             background: rgba(255,255,255,0.2); /* Keep background slightly transparent */
-            /* backdrop-filter: blur(15px); Removed blur for more solidity */
             border: 5px solid var(--sun-yellow);
             border-radius: 25px;
             padding: 25px 30px;
@@ -101,6 +100,13 @@
             font-size: 3.8rem;
             color: var(--sun-yellow);
             text-shadow: 3px 3px 0 #000;
+        }
+        /* New style for the small text below prize amount */
+        .prize-update-note {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            margin-top: 5px;
+            font-style: italic;
         }
 
         /* Navigation */
@@ -216,7 +222,8 @@
         
         <div class="prize-container">
             <div class="prize-label">TOTAL PRIZE POOL 🏆</div>
-            <div id="prizeAmount">$0</div>
+            <div id="prizeAmount">TBD</div>
+            <p class="prize-update-note">[Will update live when game begins]</p>
         </div>
     </header>
 
@@ -279,19 +286,20 @@
             }, 28);
         }
 
-        window.onload = animatePrize;
-
-        // Smooth scrolling
-        document.querySelectorAll('nav a[href^="#"]').forEach(link => {
-            link.addEventListener('click', e => {
-                if (link.getAttribute('href') !== '#') {
-                    e.preventDefault();
-                    document.querySelector(link.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
+        window.onload = () => {
+            // animatePrize(); // Commented out to keep prize as TBD
+            // Smooth scrolling
+            document.querySelectorAll('nav a[href^="#"]').forEach(link => {
+                link.addEventListener('click', e => {
+                    if (link.getAttribute('href') !== '#') {
+                        e.preventDefault();
+                        document.querySelector(link.getAttribute('href')).scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
             });
-        });
+        };
     </script>
 </body>
 </html>
