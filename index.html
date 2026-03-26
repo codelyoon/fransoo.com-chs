@@ -354,8 +354,8 @@
 
         <div class="countdown-container">
             <div class="countdown-label">COUNTDOWN UNTIL START DATE ⏱️</div>
-            <span id="countdownTimer"></span>
-            <!-- The countdown-note paragraph has been removed -->
+            <span id="countdownTimer">TBD</span>
+            <p class="countdown-note">[The specific start date is still being finalized and will be decided soon. Follow IG to stay up to date.]</p>
         </div>
     </header>
 
@@ -452,10 +452,8 @@
             }, 28);
         }
 
-        // Countdown function
+        // Countdown function - now commented out so it doesn't run automatically
         function updateCountdown() {
-            // Set the target date and time to May 1st, 2026, 00:00:00 in UTC-6 (CST/MDT)
-            // Note: GMT-0600 is used for a timezone-aware date object.
             const startDate = new Date('May 1, 2026 00:00:00 GMT-0600'); 
             const now = new Date();
             const timeDifference = startDate - now;
@@ -476,11 +474,10 @@
         }
 
         window.onload = () => {
-            // Prize pool is now static at $0 with the updated message
-            // animatePrize(); // Keep this commented out as per instructions
+            // animatePrize(); // Still commented out, prize starts at $0
             
-            updateCountdown(); // Call once immediately to show countdown without delay
-            setInterval(updateCountdown, 1000); // Update countdown every second
+            // updateCountdown(); // Commented out
+            // setInterval(updateCountdown, 1000); // Commented out
             
             // Smooth scrolling
             document.querySelectorAll('nav a[href^="#"]').forEach(link => {
