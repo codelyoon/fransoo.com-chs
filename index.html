@@ -348,14 +348,14 @@
         
         <div class="prize-container">
             <div class="prize-label">TOTAL PRIZE POOL 🏆</div>
-            <div id="prizeAmount">$TBD</div>
-            <p class="prize-update-note">[Will update live when game begins]<br>[Prize pool will be equally split amongst the winning group.]</p>
+            <div id="prizeAmount">$0</div>
+            <p class="prize-update-note">The signup form and entry fee payments will go live soon, when it does, this will update with the live prize pool!</p>
         </div>
 
         <div class="countdown-container">
             <div class="countdown-label">COUNTDOWN UNTIL START DATE ⏱️</div>
-            <span id="countdownTimer">TBD</span>
-            <p class="countdown-note">[The specific start date is still being finalized and will be decided soon. Follow IG to stay up to date.]</p>
+            <span id="countdownTimer"></span>
+            <!-- Removed the countdown-note paragraph -->
         </div>
     </header>
 
@@ -452,7 +452,7 @@
             }, 28);
         }
 
-        // Countdown function (kept for future use)
+        // Countdown function
         function updateCountdown() {
             const startDate = new Date('May 1, 2026 00:00:00 GMT-0600'); // May 1st, 2026, 00:00:00 in UTC-6
             const now = new Date();
@@ -474,11 +474,11 @@
         }
 
         window.onload = () => {
-            // animatePrize(); // Commented out to keep prize as TBD
+            // animatePrize(); // Still commented out, prize starts at $0
             
-            // updateCountdown(); // Commented out to keep countdown as TBD
-            // setInterval(updateCountdown, 1000); // Commented out
-
+            updateCountdown(); // Call once immediately to avoid initial "TBD"
+            setInterval(updateCountdown, 1000); // Activate countdown timer
+            
             // Smooth scrolling
             document.querySelectorAll('nav a[href^="#"]').forEach(link => {
                 link.addEventListener('click', e => {
