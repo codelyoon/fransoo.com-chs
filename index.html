@@ -349,13 +349,13 @@
         <div class="prize-container">
             <div class="prize-label">TOTAL PRIZE POOL 🏆</div>
             <div id="prizeAmount">$0</div>
-            <p class="prize-update-note">The signup form and entry fee payments will go live soon, when it does, this will update with the live prize pool!</p>
+            <p class="prize-update-note">Will update live when entry payments start getting accepted!</p>
         </div>
 
         <div class="countdown-container">
             <div class="countdown-label">COUNTDOWN UNTIL START DATE ⏱️</div>
             <span id="countdownTimer"></span>
-            <!-- Removed the countdown-note paragraph -->
+            <!-- The countdown-note paragraph has been removed -->
         </div>
     </header>
 
@@ -406,7 +406,7 @@
         <h2>SIGNUP FORM (TBA)</h2>
         <div class="section-placeholder">
             <strong>Sign-up form will be announced soon.</strong><br><br>
-            Like last year, every person that wants to enter must pay an entry fee via cash or e-transfer. All that’s collected will go towards the prize pool for the winning group to split, & any small subscription costs that may be required to start the game.
+            Like last year, every person that wants to enter must pay an entry fee via cash or e-transfer. All that’s collected will will go towards the prize pool for the winning group to split, & any small subscription costs that may be required to start the game.
         </div>
     </section>
 
@@ -454,7 +454,9 @@
 
         // Countdown function
         function updateCountdown() {
-            const startDate = new Date('May 1, 2026 00:00:00 GMT-0600'); // May 1st, 2026, 00:00:00 in UTC-6
+            // Set the target date and time to May 1st, 2026, 00:00:00 in UTC-6 (CST/MDT)
+            // Note: GMT-0600 is used for a timezone-aware date object.
+            const startDate = new Date('May 1, 2026 00:00:00 GMT-0600'); 
             const now = new Date();
             const timeDifference = startDate - now;
 
@@ -474,10 +476,11 @@
         }
 
         window.onload = () => {
-            // animatePrize(); // Still commented out, prize starts at $0
+            // Prize pool is now static at $0 with the updated message
+            // animatePrize(); // Keep this commented out as per instructions
             
-            updateCountdown(); // Call once immediately to avoid initial "TBD"
-            setInterval(updateCountdown, 1000); // Activate countdown timer
+            updateCountdown(); // Call once immediately to show countdown without delay
+            setInterval(updateCountdown, 1000); // Update countdown every second
             
             // Smooth scrolling
             document.querySelectorAll('nav a[href^="#"]').forEach(link => {
