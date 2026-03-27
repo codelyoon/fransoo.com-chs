@@ -432,12 +432,66 @@
             margin-top: 10px;
             display: block;
         }
+        .rule-content img { /* Style for images within rule content */
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 15px 0;
+            display: block; /* Ensures it takes its own line */
+        }
 
         /* Signup Form Section */
         #signup {
             background-color: var(--translucent-blue);
             border-radius: 25px;
             margin-bottom: 30px; /* Add some space between sections */
+        }
+
+        /* Registered Players Section */
+        .registered-players-container {
+            background: rgba(255,255,255,0.2);
+            border: 5px solid var(--water-blue); /* Distinct color for this section */
+            border-radius: 25px;
+            padding: 15px 20px;
+            max-width: 420px;
+            margin: 30px auto; /* Spacing below rules */
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        .registered-players-label {
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            color: white;
+        }
+        .player-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            padding-bottom: 3px;
+            border-bottom: 1px dashed rgba(255,255,255,0.2);
+        }
+        .player-item:last-of-type {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        .player-name {
+            font-weight: bold;
+            flex-grow: 1;
+            text-align: left;
+        }
+        .player-status {
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+        .registered-players-note {
+            font-size: 0.75rem;
+            opacity: 0.7;
+            margin-top: 10px;
+            font-style: italic;
         }
 
         /* Instagram Embed Section */
@@ -658,6 +712,7 @@
                 <span class="toggle-icon">+</span>
             </div>
             <div class="rule-content">
+                <img src="https://raw.githubusercontent.com/codelyoon/fransoo.com-chs/main/IMG_7798.jpg" alt="Map showing safe zones and boundaries" />
                 <p><strong>School Grounds (Red Zone):</strong></p>
                 <ul>
                     <li>Everything inside the red boundary lines shown in the map/photo is a safe zone (no eliminations)</li>
@@ -854,6 +909,23 @@
         </div>
 
     </section>
+
+    <div class="registered-players-container">
+        <div class="registered-players-label">REGISTERED PLAYERS</div>
+        <div class="player-item">
+            <span class="player-name"></span>
+            <span class="player-status"></span>
+        </div>
+        <div class="player-item">
+            <span class="player-name"></span>
+            <span class="player-status"></span>
+        </div>
+        <div class="player-item">
+            <span class="player-name"></span>
+            <span class="player-status"></span>
+        </div>
+        <p class="registered-players-note">[This will update once registration opens with players who have paid and are now added into the game.]</p>
+    </div>
 
     <section id="signup">
         <h2>SIGNUP FORM (TBA)</h2>
