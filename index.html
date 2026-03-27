@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device=width, initial-scale=1.0">
     <title>CHS Senior Assassin 2026</title>
     <!-- Favicon - Water Gun Emoji -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔫</text></svg>">
@@ -12,6 +12,11 @@
         :root {
             --water-blue: #00b4d8;
             --sun-yellow: #ffd60a;
+            --light-grey: #bbb;
+            --dark-blue-bg: #005f99;
+            --translucent-blue: rgba(0, 119, 182, 0.75);
+            --header-blue: rgba(0, 119, 182, 0.9);
+            --footer-blue: rgba(0, 55, 90, 0.8);
         }
 
         * {
@@ -22,7 +27,7 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #005f99; /* Slightly darker base blue */
+            background-color: var(--dark-blue-bg);
             color: white;
             min-height: 100vh;
             overflow-x: hidden;
@@ -37,7 +42,6 @@
             left: 0;
             width: 200%; /* Double the width/height to ensure continuous flow */
             height: 200%;
-            /* Using a data URI for the emojis to repeat them in a pattern */
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Ctext x='0' y='25' font-size='2.8rem' opacity='0.7' fill='rgba(255,255,255,1)'%3E%F0%9F%92%A6%3C/text%3E%3Ctext x='50' y='75' font-size='2.8rem' opacity='0.7' fill='rgba(255,255,255,1)'%3E%F0%9F%94%AB%3C/text%3E%3C/svg%3E");
             background-repeat: repeat;
             background-size: 100px 100px; /* Size of the pattern unit */
@@ -147,7 +151,7 @@
 
         /* Navigation */
         nav {
-            background: rgba(0, 119, 182, 0.9);
+            background: var(--header-blue);
             backdrop-filter: blur(10px);
             position: sticky;
             top: 0;
@@ -194,7 +198,7 @@
 
         /* Announcement Card Styling */
         .announcement-card {
-            background-color: rgba(0, 119, 182, 0.75);
+            background-color: var(--translucent-blue);
             border-radius: 25px;
             margin-bottom: 30px;
             padding: 40px;
@@ -259,7 +263,7 @@
         /* New style for timestamp */
         .timestamp {
             font-size: 0.8rem;
-            color: #bbb; /* Light grey */
+            color: var(--light-grey); /* Light grey */
             text-align: center;
             margin-top: 20px; /* Space above timestamp */
             opacity: 0.8;
@@ -275,23 +279,119 @@
             border-radius: 18px;
         }
 
-        /* Rules */
+        /* Rules Section Styling - Accordion */
         #rules {
-            background-color: rgba(0, 119, 182, 0.75); /* Made slightly translucent */
+            background-color: var(--translucent-blue);
             border-radius: 25px;
-            margin-bottom: 30px; /* Add some space between sections */
+            margin-bottom: 30px;
+            padding: 40px 20px; /* Adjusted padding */
+            max-width: 800px; /* Constrain width for readability */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .rule-item {
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .rule-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            background-color: rgba(255,255,255,0.15);
+            transition: background-color 0.2s ease;
+        }
+
+        .rule-header:hover {
+            background-color: rgba(255,255,255,0.25);
+        }
+
+        .rule-header span.number {
+            color: var(--sun-yellow);
+            margin-right: 10px;
+            font-size: 1.3rem;
+        }
+
+        .rule-header span.title-text {
+            flex-grow: 1;
+            text-align: left;
+        }
+
+        .rule-header .toggle-icon {
+            font-size: 1.8rem;
+            line-height: 1;
+            transition: transform 0.2s ease;
+            color: var(--sun-yellow);
+        }
+
+        .rule-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            padding: 0 20px; /* Apply horizontal padding */
+            text-align: left;
+        }
+
+        .rule-item.active .rule-content {
+            max-height: 500px; /* Sufficiently large to contain content */
+            padding-bottom: 15px; /* Add bottom padding when expanded */
+            transition: max-height 0.4s ease-in;
+        }
+        
+        .rule-item.active .rule-header .toggle-icon {
+            transform: rotate(45deg);
+        }
+
+        .rule-content ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            padding-top: 10px;
+        }
+
+        .rule-content ol {
+            list-style-type: decimal;
+            margin-left: 20px;
+            padding-top: 10px;
+        }
+
+        .rule-content p {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .rule-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .rule-content ul li, .rule-content ol li {
+            margin-bottom: 5px;
+        }
+
+        .rule-content .important-note {
+            color: var(--sun-yellow);
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
         }
 
         /* Signup Form Section */
         #signup {
-            background-color: rgba(0, 119, 182, 0.75); /* Made slightly translucent */
+            background-color: var(--translucent-blue);
             border-radius: 25px;
             margin-bottom: 30px; /* Add some space between sections */
         }
 
         /* Instagram Embed Section */
         #feed {
-            background-color: rgba(0, 119, 182, 0.75); /* Made slightly translucent */
+            background-color: var(--translucent-blue);
             border-radius: 25px;
             padding: 30px 20px;
         }
@@ -316,7 +416,7 @@
         footer {
             text-align: center;
             padding: 50px 20px 30px;
-            background: rgba(0, 55, 90, 0.8);
+            background: var(--footer-blue);
             font-size: 1rem;
         }
 
@@ -336,6 +436,13 @@
             }
             .title {
                 font-size: 3.2rem;
+            }
+            #rules {
+                padding: 20px 10px;
+            }
+            .rule-header, .rule-content {
+                padding-left: 15px;
+                padding-right: 15px;
             }
         }
     </style>
@@ -385,21 +492,295 @@
                 </div>
             </div>
             <div class="tweet-content">
-                <p>Results are in from the first few votes, you voted to play in teams of two (duos) and voted for a $10 entry fee, meaning if we get 200 players, the prize pool will be $2000!</p>
-                <p>Start date vote is up on the IG story till tomorrow. Stay tuned and keep watching the instagram page for more updates!</p>
+                <p>Voting for start date + some rules are posted as stories on the Instagram account!</p>
+                <p>These will be up until noon today (make sure to get your vote in!), then I'll update info and rules based on those results. Stay tuned and keep watching the IG page for more updates!</p>
             </div>
             <!-- Updated timestamp element -->
-            <span class="timestamp">Posted: Mar 26, 2:18PM</span>
+            <span class="timestamp">Posted: Mar 26, 08:43</span>
         </div>
     </section>
 
     <section id="rules">
         <h2>GAME RULES</h2>
-        <div class="section-placeholder">
-            <strong>Rules are still being finalized by the admins.</strong><br><br>
-            Stay tuned — full rules will drop soon!<br>
-            Follow @chs.srassassin26 for updates 💦
+        
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">1.</span>
+                <span class="title-text">🎯 Objective</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <p>This is a Battle Royale (Duos) format.</p>
+                <p>You will play in teams of 2 — eliminate other teams and be the last team standing.</p>
+            </div>
         </div>
+
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">2.</span>
+                <span class="title-text">💰 Entry Fee</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <p>Info regarding entry payments can be found on the sign-up section of this website. The $10 payment is mandatory and you cannot play unless it is paid. All these payments collected from players will be allocated towards the prize pool, which will be split amongst the winning duo.</p>
+            </div>
+        </div>
+
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">3.</span>
+                <span class="title-text">👥 Teams</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <ul>
+                    <li>Players must register in teams of 2</li>
+                    <li>Each team must:
+                        <ul>
+                            <li>Create a team name</li>
+                            <li>Upload a team photo in the app</li>
+                        </ul>
+                    </li>
+                    <li>Both teammates are active players</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">4.</span>
+                <span class="title-text">💀 Eliminations (Duos Rules)</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <ul>
+                    <li>If one teammate is eliminated, they are out</li>
+                    <li>The other teammate continues solo</li>
+                    <li>A team is fully eliminated when both players are out</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">5.</span>
+                <span class="title-text">🔫 Approved Weapons</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <ul>
+                    <li>Water balloons</li>
+                    <li>Water buckets</li>
+                    <li>Brightly colored water guns only</li>
+                </ul>
+                <p class="important-note">❗ Water guns must be clearly toy-like (no realistic-looking replicas)</p>
+                <p class="important-note">❗ No other items are allowed</p>
+                <p class="important-note">❗ Gel blasters and similar items are NOT allowed due to high impact</p>
+            </div>
+        </div>
+
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">6.</span>
+                <span class="title-text">🚫 Safe Zones & Boundaries</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <p><strong>School Grounds (Red Zone):</strong></p>
+                <ul>
+                    <li>Everything inside the red boundary lines shown in the map/photo is a safe zone (no eliminations)</li>
+                </ul>
+                <p><strong>Outside School Grounds:</strong></p>
+                <ul>
+                    <li>Everything outside the red zone is active play (eliminations allowed)</li>
+                </ul>
+                <p><strong>Exception – School Classes:</strong></p>
+                <ul>
+                    <li>If you leave school grounds for a class, you are still safe</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">7.</span>
+                <span class="title-text">🏢 Special Safe Zone Rules</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <p><strong>💼 Work (Jobs)</strong></p>
+                <ul>
+                    <li>You are safe while at work</li>
+                    <li>You are safe until you touch your car</li>
+                    <li>Once you touch your car, you are no longer safe</li>
+                </ul>
+                <p><strong>⛪ Religious Places / Events</strong></p>
+                <ul>
+                    <li>Same rules as work:
+                        <ul>
+                            <li>Safe while attending</li>
+                            <li>Safe until you touch your car</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">8.</span>
+                <span class="title-text">⏰ Game Hours</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <p>Eliminations are allowed 24 hours a day</p>
+            </div>
+        </div>
+
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">9.</span>
+                <span class="title-text">☠ How to Eliminate a Player</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <ul>
+                    <li>You must use an approved method (water hit, etc.)</li>
+                    <li>The elimination must be:
+                        <ul>
+                            <li>Clearly captured on video</li>
+                            <li>Fair</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p>After elimination:</p>
+                <ol>
+                    <li>Upload the video to the Splashin app</li>
+                    <li>Wait for confirmation from organizers</li>
+                    <li>The eliminated player is out once approved</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">10.</span>
+                <span class="title-text">📱 Reporting Eliminations</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <ul>
+                    <li>All eliminations must be submitted through the Splashin app</li>
+                    <li>Your submission must include:
+                        <ul>
+                            <li>Clear video proof of the elimination</li>
+                            <li>Both players visible if possible</li>
+                            <li>Time/date (if required)</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">11.</span>
+                <span class="title-text">⚠ Rules & Fair Play</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <ul>
+                    <li>No physical harm, harassment, or unsafe behavior</li>
+                    <li>No trespassing on private property unless you have permission from a family member</li>
+                    <li>No damaging property</li>
+                    <li>No abusing safe zones</li>
+                    <li>No puppy guarding the safe zone (waiting outside the safe zone to ambush players immediately as they leave)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">12.</span>
+                <span class="title-text">🚨 Conduct Rules</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <ul>
+                    <li>I will not wear disguises, masks, or conduct myself in a manner that may frighten or otherwise endanger players or members of the public</li>
+                    <li>I will not conduct myself in a manner that has the appearance of a dangerous or illegal activity</li>
+                    <li>I will not engage in any activities that may lead to harm of others, property damage, or public nuisance</li>
+                    <li>I will not engage in any gameplay while in, operating, or near moving vehicles</li>
+                </ul>
+                <p class="important-note">Breaking rules = disqualification</p>
+            </div>
+        </div>
+
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">13.</span>
+                <span class="title-text">💵 Revive Rule</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <p>There are a limited number of revives available, and these will be randomly placed at various geographical locations for players to discover and claim.</p>
+                <p>However, within the first two weeks of the game, to help ramp up the prize pool, we are offering an expensive choice of a revive for $50. This guarantees you will be back in the game immediately after payment is received. After the first two weeks, these guaranteed revives will no longer be offered as the game narrows down, and it will not be fair to others.</p>
+                <p>For any type of revive:</p>
+                <ul>
+                    <li>Each player gets 1 revive total for the entire game.</li>
+                    <li>You can only request a revive if your teammate is still in the game.</li>
+                    <li>If both teammates are out, your team is fully eliminated (no revive allowed).</li>
+                    <li>You must contact organizers for approval before being revived.</li>
+                    <li>Once approved, the player is placed back into the game.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">14.</span>
+                <span class="title-text">🔥 Purge Days</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <ul>
+                    <li>On announced Purge Days, normal safe zone rules are removed except school grounds</li>
+                    <li>Everyone’s location will be enabled in the app</li>
+                    <li>Purge is a set period of time announced by organizers</li>
+                    <li>During a purge, everyone is free game (no targets needed)</li>
+                    <li>Floaties, goggles, or any immunity do NOT work</li>
+                    <li>If you eliminate anyone during a purge, you will advance to the next week</li>
+                    <li>The start date/time may be kept secret by organizers</li>
+                    <li>All other rules (no trespassing, safety, etc.) still apply</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">15.</span>
+                <span class="title-text">🏆 Winning</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <p>The last team (or last player if solo remains) wins</p>
+            </div>
+        </div>
+
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">16.</span>
+                <span class="title-text">📢 Final Notes</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <ul>
+                    <li>This is a game — safety and respect come first</li>
+                    <li>Organizers have final say on all decisions</li>
+                </ul>
+            </div>
+        </div>
+
     </section>
 
     <section id="signup">
@@ -474,7 +855,8 @@
         }
 
         window.onload = () => {
-            // animatePrize(); // Still commented out, prize starts at $0
+            // Prize pool is now static at $0 with the updated message
+            // animatePrize(); // Keep this commented out as per instructions
             
             // updateCountdown(); // Commented out
             // setInterval(updateCountdown, 1000); // Commented out
@@ -488,6 +870,15 @@
                             behavior: 'smooth'
                         });
                     }
+                });
+            });
+
+            // Accordion functionality for rules
+            const ruleHeaders = document.querySelectorAll('.rule-header');
+            ruleHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const ruleItem = header.closest('.rule-item');
+                    ruleItem.classList.toggle('active');
                 });
             });
         };
