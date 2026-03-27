@@ -194,10 +194,14 @@
         }
 
         .countdown-note {
-            font-size: 0.75rem;
-            opacity: 0.7;
+            font-size: 1rem; /* Bigger font size */
+            opacity: 1; /* Fully opaque */
             margin-top: 5px;
-            font-style: italic;
+            font-style: normal; /* Normal style */
+            font-weight: bold; /* Bold text */
+            color: red; /* Red color */
+            display: block; /* Ensures it takes its own line and can be centered */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5); /* Add text shadow for emphasis */
         }
 
         /* Registered Players Section */
@@ -587,7 +591,7 @@
         <div class="countdown-container">
             <div class="countdown-label">COUNTDOWN UNTIL START DATE ⏱️</div>
             <span id="countdownTimer">TBD</span>
-            <p class="countdown-note">[The specific start date is still being finalized and will be decided soon. Follow IG to stay up to date.]</p>
+            <p class="countdown-note">[May 4, 2026]</p>
         </div>
 
         <div class="registered-players-container">
@@ -901,6 +905,7 @@
             </div>
             <div class="rule-content">
                 <ul>
+                    <li>On announced Purge Days, normal safe zone rules are removed except school grounds</li>
                     <li>Everyone’s location will be enabled in the app</li>
                     <li>Purge is a set period of time announced by organizers</li>
                     <li>During a purge, everyone is free game (no targets needed)</li>
