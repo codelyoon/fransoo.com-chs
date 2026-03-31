@@ -1096,4 +1096,1102 @@
         };
     </script>
 </body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHS Senior Assassin 2026</title>
+    <!-- Favicon - Water Gun Emoji -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔫</text></svg>">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Impact:wght@400;700&family=Poppins:wght@600&display=swap');
+
+        :root {
+            --water-blue: #00b4d8;
+            --sun-yellow: #ffd60a;
+            --light-grey: #bbb;
+            --dark-blue-bg: #005f99;
+            --translucent-blue: rgba(0, 119, 182, 0.75);
+            --header-blue: rgba(0, 119, 182, 0.9);
+            --footer-blue: rgba(0, 55, 90, 0.8);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-blue-bg);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Playful repeating emoji background */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 200%; /* Double the width/height to ensure continuous flow */
+            height: 200%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Ctext x='0' y='25' font-size='2.8rem' opacity='0.7' fill='rgba(255,255,255,1)'%3E%F0%9F%92%A6%3C/text%3E%3Ctext x='50' y='75' font-size='2.8rem' opacity='0.7' fill='rgba(255,255,255,1)'%3E%F0%9F%94%AB%3C/text%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 100px 100px; /* Size of the pattern unit */
+            opacity: 0.12; /* Slightly transparent blue, visible emojis */
+            pointer-events: none;
+            z-index: -1;
+            animation: emojiFlow 30s linear infinite; /* Adjusted animation for continuous flow */
+        }
+
+        @keyframes emojiFlow {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-50%, -50%); } /* Scrolls diagonally to ensure continuous loop */
+        }
+
+        header {
+            text-align: center;
+            padding: 50px 20px 30px;
+        }
+
+        .title {
+            font-family: 'Impact', sans-serif;
+            font-size: clamp(3rem, 10vw, 6rem);
+            font-weight: 400;
+            letter-spacing: -3px;
+            text-shadow: 
+                4px 4px 0 #000,
+                -2px -2px 0 #000,
+                2px -2px 0 #000,
+                -2px 2px 0 #000;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Prize Pool */
+        .prize-container {
+            background: rgba(255,255,255,0.2); /* Keep background slightly transparent */
+            border: 5px solid var(--sun-yellow);
+            border-radius: 25px;
+            padding: 25px 30px;
+            max-width: 420px;
+            margin: 30px auto 15px auto; /* Reduced bottom margin to bring countdown closer */
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        .prize-label {
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
+
+        #prizeAmount {
+            font-family: 'Impact', sans-serif;
+            font-size: 3.8rem;
+            color: var(--sun-yellow);
+            text-shadow: 3px 3px 0 #000;
+        }
+        /* New style for the small text below prize amount */
+        .prize-update-note {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        /* Recent Additions */
+        .recent-additions-container {
+            background: rgba(255,255,255,0.2);
+            border: 5px solid var(--sun-yellow);
+            border-radius: 25px;
+            padding: 15px 20px;
+            max-width: 420px;
+            margin: 15px auto 15px auto; /* Spaced below prize pool, above countdown */
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        .recent-additions-label {
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            color: white;
+        }
+        .addition-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            padding-bottom: 3px;
+            border-bottom: 1px dashed rgba(255,255,255,0.2);
+        }
+        .addition-item:last-of-type {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        .addition-amount {
+            color: var(--sun-yellow);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .addition-details {
+            text-align: left;
+            flex-grow: 1;
+        }
+        .addition-timestamp {
+            font-size: 0.75rem;
+            opacity: 0.6;
+        }
+        .recent-additions-note {
+            font-size: 0.75rem;
+            opacity: 0.7;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        /* Countdown */
+        .countdown-container {
+            background: rgba(255,255,255,0.2); /* Changed to translucent white like prize pool */
+            border: 5px solid red; /* Changed to visible red */
+            border-radius: 25px;
+            padding: 15px 20px; /* Reduced padding for smaller height */
+            max-width: 420px;
+            margin: 15px auto 15px auto; /* Keep it spaced from prize pool and next section */
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        .countdown-label {
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 5px;
+            color: white; /* Changed to white */
+        }
+
+        #countdownTimer {
+            font-family: 'Impact', sans-serif;
+            font-size: 2.2rem; /* Smaller font size for countdown */
+            color: red; /* Kept red */
+            text-shadow: 2px 2px 0 #000;
+        }
+
+        .countdown-note {
+            font-size: 1rem; /* Bigger font size */
+            opacity: 1; /* Fully opaque */
+            margin-top: 5px;
+            font-style: normal; /* Normal style */
+            font-weight: bold; /* Bold text */
+            color: red; /* Red color */
+            display: block; /* Ensures it takes its own line and can be centered */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5); /* Add text shadow for emphasis */
+        }
+
+        /* Registered Players Section */
+        .registered-players-container {
+            background: rgba(255,255,255,0.2);
+            border: 5px solid var(--water-blue); /* Distinct color for this section */
+            border-radius: 25px;
+            padding: 15px 20px;
+            max-width: 420px;
+            margin: 15px auto 30px auto; /* Spacing below countdown */
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        .registered-players-label {
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            color: white;
+        }
+        .player-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            padding-bottom: 3px;
+            border-bottom: 1px dashed rgba(255,255,255,0.2);
+        }
+        .player-item:last-of-type {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        .player-name {
+            font-weight: bold;
+            flex-grow: 1;
+            text-align: left;
+        }
+        .player-status {
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+        .registered-players-note {
+            font-size: 0.75rem;
+            opacity: 0.7;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--header-blue);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 16px 0;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-family: 'Impact', sans-serif;
+            font-size: 1.35rem;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--sun-yellow);
+            text-shadow: 0 0 10px #ffd60a;
+        }
+
+        /* Sections */
+        section {
+            padding: 70px 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-family: 'Impact', sans-serif;
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 40px;
+            text-shadow: 3px 3px 0 #000;
+        }
+
+        /* Announcement Card Styling */
+        .announcement-card {
+            background-color: var(--translucent-blue);
+            border-radius: 25px;
+            margin-bottom: 30px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            max-width: 600px; /* Constrain width for tweet-like appearance */
+            margin-left: auto;
+            margin-right: auto;
+            text-align: left; /* Align tweet content left */
+        }
+
+        .tweet-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .tweet-pfp {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            margin-right: 12px;
+            border: 2px solid white; /* Small border for pop */
+        }
+
+        .tweet-info {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: white;
+        }
+
+        .verified-badge {
+            width: 18px;
+            height: 18px;
+            margin-left: 8px;
+            fill: var(--water-blue); /* Blue for verified check */
+            vertical-align: middle;
+        }
+
+        .admin-tag {
+            background-color: rgba(255,255,255,0.2);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-size: 0.75rem;
+            font-weight: normal;
+            margin-left: 8px;
+            line-height: 1; /* Adjust line height to prevent extra space */
+            vertical-align: middle;
+        }
+
+        .tweet-content {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .tweet-content p {
+            margin-bottom: 10px; /* Space between paragraphs in the tweet */
+        }
+
+        /* New style for timestamp */
+        .timestamp {
+            font-size: 0.8rem;
+            color: var(--light-grey); /* Light grey */
+            text-align: center;
+            margin-top: 20px; /* Space above timestamp */
+            opacity: 0.8;
+            display: block; /* Ensures it takes its own line and can be centered */
+        }
+
+        /* Generic placeholder for rules/signup */
+        .section-placeholder {
+            padding: 40px;
+            text-align: center;
+            font-size: 1.25rem;
+            background: rgba(0,0,0,0.25);
+            border-radius: 18px;
+        }
+
+        /* Rules Section Styling - Accordion */
+        #rules {
+            background-color: var(--translucent-blue);
+            border-radius: 25px;
+            margin-bottom: 30px;
+            padding: 40px 20px; /* Adjusted padding */
+            max-width: 800px; /* Constrain width for readability */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .rule-item {
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .rule-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            background-color: rgba(255,255,255,0.15);
+            transition: background-color 0.2s ease;
+        }
+
+        .rule-header:hover {
+            background-color: rgba(255,255,255,0.25);
+        }
+
+        .rule-header span.number {
+            color: var(--sun-yellow);
+            margin-right: 10px;
+            font-size: 1.3rem;
+        }
+
+        .rule-header span.title-text {
+            flex-grow: 1;
+            text-align: left;
+        }
+
+        .rule-header .toggle-icon {
+            font-size: 1.8rem;
+            line-height: 1;
+            transition: transform 0.2s ease;
+            color: var(--sun-yellow);
+        }
+
+        .rule-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            padding: 0 20px; /* Apply horizontal padding */
+            text-align: left;
+        }
+
+        .rule-item.active .rule-content {
+            max-height: 1000px; /* Increased max-height to adapt to more content */
+            padding-bottom: 15px; /* Add bottom padding when expanded */
+            transition: max-height 0.4s ease-in;
+        }
+        
+        .rule-item.active .rule-header .toggle-icon {
+            transform: rotate(45deg);
+        }
+
+        .rule-content ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            padding-top: 10px;
+        }
+
+        .rule-content ol {
+            list-style-type: decimal;
+            margin-left: 20px;
+            padding-top: 10px;
+        }
+
+        .rule-content p {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .rule-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .rule-content ul li, .rule-content ol li {
+            margin-bottom: 5px;
+        }
+
+        .rule-content .important-note {
+            color: var(--sun-yellow);
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
+        .rule-content img { /* Style for images within rule content */
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 15px auto; /* Centered image */
+            display: block; /* Ensures it takes its own line */
+        }
+
+        /* Signup Form Section */
+        #signup {
+            background-color: var(--translucent-blue);
+            border-radius: 25px;
+            margin-bottom: 30px; /* Add some space between sections */
+        }
+
+        /* Instagram Embed Section */
+        #feed {
+            background-color: var(--translucent-blue);
+            border-radius: 25px;
+            padding: 30px 20px;
+        }
+
+        .instagram-embed {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        .instagram-embed iframe {
+            width: 100%;
+            height: 620px;
+            border: none;
+            border-radius: 20px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 50px 20px 30px;
+            background: var(--footer-blue);
+            font-size: 1rem;
+        }
+
+        /* New style for the extra small copyright text */
+        .copyright-text {
+            font-size: 0.7rem; /* Even smaller font size */
+            opacity: 0.6; /* More subtle opacity */
+            margin-top: 15px; /* A bit more space from the line above */
+        }
+
+        @media (max-width: 768px) {
+            .instagram-embed iframe {
+                height: 520px;
+            }
+            nav ul {
+                gap: 20px;
+            }
+            .title {
+                font-size: 3.2rem;
+            }
+            #rules {
+                padding: 20px 10px;
+            }
+            .rule-header, .rule-content {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1 class="title">CHS SENIOR ASSASSIN</h1>
+        <p class="subtitle">CLASS OF 2026 • COCHRANE HIGH SCHOOL 💦🔫</p>
+        
+        <div class="prize-container">
+            <div class="prize-label">TOTAL PRIZE POOL 🏆</div>
+            <div id="prizeAmount">$0</div>
+            <p class="prize-update-note">Will update live when entry payments start getting accepted!</p>
+        </div>
+
+        <div class="recent-additions-container">
+            <div class="recent-additions-label">RECENT ADDITIONS</div>
+            <div class="addition-item">
+                <span class="addition-amount"></span>
+                <span class="addition-details"></span>
+                <span class="addition-timestamp"></span>
+            </div>
+            <div class="addition-item">
+                <span class="addition-amount"></span>
+                <span class="addition-details"></span>
+                <span class="addition-timestamp"></span>
+            </div>
+            <div class="addition-item">
+                <span class="addition-amount"></span>
+                <span class="addition-details"></span>
+                <span class="addition-timestamp"></span>
+            </div>
+            <p class="recent-additions-note">[This section will show the latest contributions to the prize pool (ex: entry fees, paid revives, etc.).]</p>
+        </div>
+
+        <div class="countdown-container">
+            <div class="countdown-label">COUNTDOWN UNTIL START DATE ⏱️</div>
+            <span id="countdownTimer">TBD</span>
+            <p class="countdown-note">[May 4, 2026]</p>
+        </div>
+
+        <div class="registered-players-container">
+            <div class="registered-players-label">REGISTERED PLAYERS</div>
+            <div class="player-item">
+                <span class="player-name"></span>
+                <span class="player-status"></span>
+            </div>
+            <div class="player-item">
+                <span class="player-name"></span>
+                <span class="player-status"></span>
+            </div>
+            <div class="player-item">
+                <span class="player-name"></span>
+                <span class="player-status"></span>
+            </div>
+            <p class="registered-players-note">[This will update once registration opens with players who have paid and are now added into the game.]</p>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#announcements">Announcements</a></li>
+            <li><a href="#rules">Rules</a></li>
+            <li><a href="#entry-fees">Entry Fees</a></li>
+            <li><a href="#signup">Signup</a></li>
+            <li><a href="#feed">IG Feed</a></li>
+            <!-- Removed the "Follow IG" link -->
+        </ul>
+    </nav>
+
+    <section id="announcements">
+        <h2>ANNOUNCEMENTS</h2>
+        <div class="announcement-card">
+            <div class="tweet-header">
+                <!-- IMPORTANT: Using the RAW content URL now for direct embedding -->
+                <img src="https://raw.githubusercontent.com/codelyoon/fransoo.com-chs/main/582086772_17951647944060497_9221629917420091973_n.jpg" alt="Henry Fransoo" class="tweet-pfp">
+                <div class="tweet-info">
+                    Henry Fransoo
+                    <svg class="verified-badge" viewBox="0 0 24 24" aria-label="Verified account">
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                    </svg>
+                    <span class="admin-tag">Admin</span>
+                </div>
+            </div>
+            <div class="tweet-content">
+                <p>Many votes have concluded, here’s what’s now confirmed:</p>
+                <p>Start Date: May 4<br>Team Mode: Duos (2 Players)<br>Entry Fee: $10/person ($2k prize pool if we hit 200 players)</p>
+                <p>The first draft of rules is also now available below on this website. Please take a moment to review these rules, if you have any feedback or suggestions please DM @chs.srassassin26 or my personal account @woeller23.</p>
+                <p>After rules are locked in, we can soon begin accepting sign ups.</p>
+                <p>Stay tuned for more updates!</p>
+            </div>
+            <span class="timestamp">Posted: Mar 27, 11:15AM</span>
+        </div>
+    </section>
+
+    <section id="rules">
+        <h2>GAME RULES</h2>
+        
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">1.</span>
+                <span class="title-text">🎯 Objective</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <p>This is a Battle Royale (Duos) format.</p>
+                <p>You will play in teams of 2 — eliminate other teams and be the last team standing.</p>
+            </div>
+        </div>
+
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">2.</span>
+                <span class="title-text">💰 Entry Fee</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <p>Info regarding entry payments can be found on the sign-up section of this website. The $10 payment is mandatory and you cannot play unless it is paid. All these payments collected from players will be allocated towards the prize pool (and also any small admin fees to start/maintain the game), which will be split amongst the winning duo.</p>
+            </div>
+        </div>
+
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">3.</span>
+                <span class="title-text">👥 Teams</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <ul>
+                    <li>Players must register in teams of 2</li>
+                    <li>Each team must:
+                        <ul>
+                            <li>Create a team name</li>
+                            <li>Upload a team photo in the app</li>
+                        </ul>
+                    </li>
+                    <li>Both teammates are active players</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">4.</span>
+                <span class="title-text">💀 Eliminations (Duos Rules)</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <ul>
+                    <li>If one teammate is eliminated, they are out</li>
+                    <li>The other teammate continues solo</li>
+                    <li>A team is fully eliminated when both players are out</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">5.</span>
+                <span class="title-text">🔫 Approved Weapons</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <ul>
+                    <li>Water balloons</li>
+                    <li>Water buckets</li>
+                    <li>Brightly colored water guns only</li>
+                </ul>
+                <p class="important-note">❗ Water guns must be clearly toy-like (no realistic-looking replicas)</p>
+                <p class="important-note">❗ No other items are allowed</p>
+                <p class="important-note">❗ Gel blasters and similar items are NOT allowed due to high impact</p>
+            </div>
+        </div>
+
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">6.</span>
+                <span class="title-text">🚫 Safe Zones & Boundaries</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <img src="https://raw.githubusercontent.com/codelyoon/fransoo.com-chs/main/IMG_7798.jpg" alt="Map showing safe zones and boundaries" />
+                <p><strong>School Grounds (Red Zone):</strong></p>
+                <ul>
+                    <li>Everything inside the red boundary lines shown in the map/photo is a safe zone (no eliminations)</li>
+                </ul>
+                <p><strong>Outside School Grounds:</strong></p>
+                <ul>
+                    <li>Everything outside the red zone is active play (eliminations allowed)</li>
+                </ul>
+                <p><strong>Exception – School Classes:</strong></p>
+                <ul>
+                    <li>If you leave school grounds for a class, you are still safe</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">7.</span>
+                <span class="title-text">🏢 Personal Safe Zone Rules</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <p><strong>💼 Work (Jobs)</strong></p>
+                <ul>
+                    <li>You are safe while at work</li>
+                    <li>You are safe until you touch your car</li>
+                    <li>Once you touch your car, you are no longer safe</li>
+                </ul>
+                <p><strong>⛪ Religious Places / Events</strong></p>
+                <ul>
+                    <li>Same rules as work:
+                        <ul>
+                            <li>Safe while attending</li>
+                            <li>Safe until you touch your car</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p><strong>🏅 Sports/Team Training</strong></p>
+                <ul>
+                    <li>When you are actively playing/training in your team sport, you are safe until the game/training session is over.</li>
+                    <li>*Example: If you arrive at volleyball practice, you are safe once you enter the facility, but once you leave, you’re free game.</li>
+                    <li>Safe zones are valid as long as you’re participating in a sport which involves a coach/trainer/instructor.</li>
+                    <li>*For example, if you are simply at the driving range on the golf course with your friends without a coach or instructor, you’re free game.</li>
+                </ul>
+                <p><strong>🏡 People's Houses</strong></p>
+                <ul>
+                    <li>You are allowed to lurk around the area, but you are not allowed to break in or enter someone’s house unless you have permission from your target’s family member.</li>
+                    <li>*Example: If your target's parents/siblings allow you into your target’s house, you are allowed to go in and try to eliminate them.</li>
+                    <li>You are also allowed to knock or ring on their front doorbell and if your target answers or you manage to lure them to the front door, you’re allowed to try to eliminate them (without entering the house unless given permission).</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">8.</span>
+                <span class="title-text">🏥 Immunity</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <p>Immunity keeps you from being eliminated; if worn, you cannot be eliminated when shot.</p>
+                <p>Approved immunity items include:</p>
+                <ul>
+                    <li>Water wings/floaties</li>
+                    <li>Goggles</li>
+                </ul>
+                <p>These MUST be visible on your person for full transparency for your assassin (ex. Goggles MUST be on eyes or forehead, and floaties MUST be visible on your arms). If you hide immunity items under clothing and are shot, you are in violation of this rule and WILL be eliminated.</p>
+                <p>Immunity items are not able to provide you protection on purge days.</p>
+            </div>
+        </div>
+
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">9.</span>
+                <span class="title-text">⏰ Game Hours</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <p>Eliminations are allowed 24 hours a day</p>
+            </div>
+        </div>
+
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">10.</span>
+                <span class="title-text">☠ How to Eliminate a Player</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <ul>
+                    <li>You must use an approved method (water hit, etc.)</li>
+                    <li>The elimination must be:
+                        <ul>
+                            <li>Clearly captured on video</li>
+                            <li>Fair</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p>After elimination:</p>
+                <ol>
+                    <li>Upload the video to the Splashin app</li>
+                    <li>Wait for confirmation from organizers</li>
+                    <li>The eliminated player is out once approved</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">11.</span>
+                <span class="title-text">📱 Reporting Eliminations</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <ul>
+                    <li>All eliminations must be submitted through the Splashin app</li>
+                    <li>Your submission must include:
+                        <ul>
+                            <li>Clear video proof of the elimination</li>
+                            <li>Both players visible if possible</li>
+                            <li>Time/date (if required)</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">12.</span>
+                <span class="title-text">⚠ Rules & Fair Play</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <ul>
+                    <li>No physical harm, harassment, or unsafe behavior</li>
+                    <li>No trespassing on private property unless you have permission from a family member</li>
+                    <li>No damaging property</li>
+                    <li>No abusing safe zones</li>
+                    <li>No puppy guarding the safe zone (waiting outside the safe zone to ambush players immediately as they leave)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">13.</span>
+                <span class="title-text">🚨 Conduct Rules</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <ul>
+                    <li>I will not wear disguises, masks, or conduct myself in a manner that may frighten or otherwise endanger players or members of the public</li>
+                    <li>I will not conduct myself in a manner that has the appearance of a dangerous or illegal activity</li>
+                    <li>I will not engage in any activities that may lead to harm of others, property damage, or public nuisance</li>
+                    <li>I will not engage in any gameplay while in, operating, or near moving vehicles</li>
+                </ul>
+                <p class="important-note">Breaking rules = disqualification</p>
+            </div>
+        </div>
+
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">14.</span>
+                <span class="title-text">❤️ Revives</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <p><strong>(Normal Revives)</strong> There are a limited number of revives available, and these will be randomly placed at various geographical locations for players to discover and claim.</p>
+                <p><strong>(Paid Revives)</strong> However, within the first two weeks of the game, to help ramp up the prize pool, we are offering an expensive choice of a revive for $50. This guarantees you will be back in the game immediately after payment is received. After the first two weeks, these guaranteed revives will no longer be offered as the game narrows down, and and it will not be fair to others.</p>
+                <p>For paid revives only:</p>
+                <ul>
+                    <li>Each player has the opportunity to buy 1 paid revive total for the entire game.</li>
+                    <li>You can only request a paid revive if your teammate is still in the game.</li>
+                    <li>If both teammates are out, your team is fully eliminated (no paid revive allowed).</li>
+                    <li>You must contact organizers for approval before being revived.</li>
+                    <li>Once approved, the player is placed back into the game.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">15.</span>
+                <span class="title-text">🔥 Purge Days</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <ul>
+                    <li>Purge Days are random, limited-time events announced by the organizers.</li>
+                    <li>Immunity items (floaties, goggles) DO NOT protect you on Purge Days.</li>
+                    <li>Everyone's location will be enabled in the app for full visibility.</li>
+                    <li>If you eliminate anyone during a Purge, you will automatically advance to the next week (meaning your original target is irrelevant for that round).</li>
+                    <li>If you do not eliminate anyone during a Purge, you still have the remainder of the round to eliminate your original target(s).</li>
+                    <li>The player (or team, if applicable) with the most successful eliminations during a single Purge Day will earn immunity for the entire next round.</li>
+                    <li>The start date/time of a Purge may be kept secret by organizers.</li>
+                    <li>All other rules (no trespassing, safety, conduct, etc.) still apply.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">16.</span>
+                <span class="title-text">🏆 Winning</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <p>The last team standing wins and splits the prize pool! (Choose your duo partner wisely, because if they get eliminated and you carry your team to the finish line, you still have to split the prize with them 😉).</p>
+            </div>
+        </div>
+
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">17.</span>
+            <span class="title-text">👑 Admin Win</span>
+            <span class="toggle-icon">+</span>
+        </div>
+        <div class="rule-content">
+            <p>Admins stand to gain nothing personally from this game. If the admin team manages to win the game, 100% of the prize pool will go to charity.</p>
+        </div>
+        </div>
+
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">18.</span>
+                <span class="title-text">📢 Final Notes</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <ul>
+                    <li>This is a game — safety and respect come first</li>
+                    <li>Organizers have final say on all decisions</li>
+                </ul>
+            </div>
+        </div>
+
+    </section>
+
+    <section id="entry-fees">
+        <h2>ENTRY FEES</h2>
+        <div class="section-placeholder">
+            <p>It was decided through a vote on the Instagram page that the entry fee will be $10, and it is mandatory that you pay this fee to play the game. All proceeds from entry fees will go towards a prize pool, which will be split among the winning duo team.</p>
+            <p><strong>How to pay:</strong></p>
+            <p><strong>1) E-transfer:</strong> Please send your $10 payment to: henry@fransoo.com.</p>
+            <p>In the message of your e-transfer, please state the full name of the person who is registering to play. If you are e-transferring for more than one person, please send the appropriate amount along with the names of the people you wish to register in the message section of the e-transfer.</p>
+            <p><strong>2) Cash:</strong> For cash payments, please find me (Henry Fransoo) in person. I have spare 4th block and will try my best to be available in the snake pit during this time. For cash payments, please pay with either 2 $5 bills or one $10 bill.</p>
+            <p><strong>Important:</strong> Make sure you have joined the Splashin app, and filled out the sign-up form. Once these steps are complete, you will be accepted into the game.</p>
+        </div>
+    </section>
+
+    <section id="signup">
+        <h2>SIGN-UP FORM</h2>
+        <div class="section-placeholder">
+            <p>The sign-up form is now open! Register using this form below.</p>
+            <p>Ensure you have done the following to make sure you will be added to the game:</p>
+            <ul>
+                <li>1) Sign up form completed</li>
+                <li>2) Completed entry fee payment</li>
+                <li>3) Joined code in Splashin app</li>
+            </ul>
+            <p>Once these three tasks have been completed, your request to join the game in the Splashin app will be accepted.</p>
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeArOgYDeBhkbOSShnJ2X1wziuNE62g7NN-0u3Mgi5SrwZIBQ/viewform?embedded=true" width="640" height="2581" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+        </div>
+    </section>
+
+    <section id="feed">
+        <h2>LIVE FROM THE 'GRAM 🔥</h2>
+        <div class="instagram-embed">
+            <!-- Official Instagram Profile Embed -->
+            <iframe src="https://www.instagram.com/chs.srassassin26/embed" 
+                    frameborder="0" 
+                    scrolling="yes" 
+                    allowtransparency="true">
+            </iframe>
+        </div>
+        <p style="text-align:center; margin-top:20px; opacity:0.9;">
+            <a href="https://www.instagram.com/chs.srassassin26/" target="_blank" 
+               style="color:#ffd60a; text-decoration:none; font-weight:bold;">
+                Open full profile on Instagram →
+            </a>
+        </p>
+    </section>
+
+    <footer>
+        <p>Made with 💦🔫 for the CHS Class of 2026</p>
+        <p style="margin-top:10px; opacity:0.8;">Play hard • Stay safe • Have fun!</p>
+        <p class="copyright-text">&copy; chs.fransoo.com a division of fransoo.com by Henry Fransoo</p>
+    </footer>
+
+    <script>
+        // Prize pool animation (rises quickly to $500)
+        function animatePrize() {
+            const prizeEl = document.getElementById('prizeAmount');
+            let current = 0;
+            const target = 500;
+            const step = Math.ceil(target / 65);
+            
+            const timer = setInterval(() => {
+                current += step;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                prizeEl.textContent = '$' + current;
+            }, 28);
+        }
+
+        // Countdown function 
+        function updateCountdown() {
+            // Set the target date and time to May 4th, 2026, 00:00:00 in UTC-6
+            const startDate = new Date('May 4, 2026 00:00:00 GMT-0600'); 
+            const now = new Date();
+            const timeDifference = startDate - now;
+
+            const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+            const countdownElement = document.getElementById('countdownTimer');
+            if (countdownElement) {
+                if (timeDifference > 0) {
+                    countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+                } else {
+                    countdownElement.innerHTML = 'GAME HAS BEGUN!';
+                }
+            }
+        }
+
+        window.onload = () => {
+            // Prize pool is now static at $0 with the updated message
+            // animatePrize(); // Keep this commented out as per instructions
+            
+            updateCountdown(); // Call once immediately to show countdown without delay
+            setInterval(updateCountdown, 1000); // Update countdown every second
+            
+            // Smooth scrolling
+            document.querySelectorAll('nav a[href^="#"]').forEach(link => {
+                link.addEventListener('click', e => {
+                    if (link.getAttribute('href') !== '#') {
+                        e.preventDefault();
+                        document.querySelector(link.getAttribute('href')).scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Accordion functionality for rules
+            const ruleHeaders = document.querySelectorAll('.rule-header');
+            ruleHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const ruleItem = header.closest('.rule-item');
+                    ruleItem.classList.toggle('active');
+                });
+            });
+        };
+    </script>
+</body>
 </html>
