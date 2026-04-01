@@ -133,9 +133,17 @@
             margin-bottom: 10px;
             color: white;
         }
+        .recent-additions-list {
+            max-height: 150px; /* Fixed height for scrollability */
+            overflow-y: auto; /* Enable vertical scrolling */
+            padding-right: 10px; /* Space for scrollbar */
+            list-style: none; /* Remove default list styling */
+            padding-left: 0;
+        }
         .addition-item {
             display: flex;
             justify-content: space-between;
+            align-items: center; /* Align items vertically */
             font-size: 0.9rem;
             margin-bottom: 5px;
             padding-bottom: 3px;
@@ -145,18 +153,15 @@
             border-bottom: none;
             margin-bottom: 0;
         }
+        .addition-name {
+            flex-grow: 1; /* Allows name to take up available space */
+            text-align: left;
+            margin-right: 10px; /* Space between name and amount */
+        }
         .addition-amount {
             color: var(--sun-yellow);
             font-weight: bold;
-            margin-right: 10px;
-        }
-        .addition-details {
-            text-align: left;
-            flex-grow: 1;
-        }
-        .addition-timestamp {
-            font-size: 0.75rem;
-            opacity: 0.6;
+            white-space: nowrap; /* Prevent amount from wrapping */
         }
         .recent-additions-note {
             font-size: 0.75rem;
@@ -202,53 +207,6 @@
             color: red; /* Red color */
             display: block; /* Ensures it takes its own line and can be centered */
             text-shadow: 1px 1px 2px rgba(0,0,0,0.5); /* Add text shadow for emphasis */
-        }
-
-        /* Registered Players Section */
-        .registered-players-container {
-            background: rgba(255,255,255,0.2);
-            border: 5px solid var(--water-blue); /* Distinct color for this section */
-            border-radius: 25px;
-            padding: 15px 20px;
-            max-width: 420px;
-            margin: 15px auto 30px auto; /* Spacing below countdown */
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-            text-align: center;
-        }
-        .registered-players-label {
-            font-size: 1rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 10px;
-            color: white;
-        }
-        .player-item {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.9rem;
-            margin-bottom: 5px;
-            padding-bottom: 3px;
-            border-bottom: 1px dashed rgba(255,255,255,0.2);
-        }
-        .player-item:last-of-type {
-            border-bottom: none;
-            margin-bottom: 0;
-        }
-        .player-name {
-            font-weight: bold;
-            flex-grow: 1;
-            text-align: left;
-        }
-        .player-status {
-            font-size: 0.8rem;
-            opacity: 0.7;
-        }
-        .registered-players-note {
-            font-size: 0.75rem;
-            opacity: 0.7;
-            margin-top: 10px;
-            font-style: italic;
         }
 
         /* Navigation */
@@ -573,26 +531,25 @@
         <div class="prize-container">
             <div class="prize-label">TOTAL PRIZE POOL 🏆</div>
             <div id="prizeAmount">$0</div>
-            <p class="prize-update-note">Will update live when entry payments start getting accepted!</p>
+            <p class="prize-update-note">Last updated: Mar 31, 6:35PM</p>
         </div>
 
         <div class="recent-additions-container">
             <div class="recent-additions-label">RECENT ADDITIONS</div>
-            <div class="addition-item">
-                <span class="addition-amount"></span>
-                <span class="addition-details"></span>
-                <span class="addition-timestamp"></span>
-            </div>
-            <div class="addition-item">
-                <span class="addition-amount"></span>
-                <span class="addition-details"></span>
-                <span class="addition-timestamp"></span>
-            </div>
-            <div class="addition-item">
-                <span class="addition-amount"></span>
-                <span class="addition-details"></span>
-                <span class="addition-timestamp"></span>
-            </div>
+            <ul class="recent-additions-list">
+                <li class="addition-item">
+                    <span class="addition-name">Henry Fransoo - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Nate Maclure - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Singh Praseutsith - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+            </ul>
             <p class="recent-additions-note">[This section will show the latest contributions to the prize pool (ex: entry fees, paid revives, etc.).]</p>
         </div>
 
@@ -602,22 +559,6 @@
             <p class="countdown-note">[May 4, 2026]</p>
         </div>
 
-        <div class="registered-players-container">
-            <div class="registered-players-label">REGISTERED PLAYERS</div>
-            <div class="player-item">
-                <span class="player-name"></span>
-                <span class="player-status"></span>
-            </div>
-            <div class="player-item">
-                <span class="player-name"></span>
-                <span class="player-status"></span>
-            </div>
-            <div class="player-item">
-                <span class="player-name"></span>
-                <span class="player-status"></span>
-            </div>
-            <p class="registered-players-note">[This will update once registration opens with players who have paid and are now added into the game.]</p>
-        </div>
     </header>
 
     <nav>
@@ -1018,9 +959,9 @@
             <p>The sign-up form is now open! Register using this form below.</p>
             <p>Ensure you have done the following to make sure you will be added to the game:</p>
             <ul>
-                <li>1) Sign up form completed</li>
-                <li>2) Completed entry fee payment</li>
-                <li>3) Joined code in Splashin app</li>
+                <li>1) Download the “Splashin” app and send your join request (code: T K C J B O)</li>
+                <li>2) Complete the signup form below on this site</li>
+                <li>3) Complete your entry fee payment</li>
             </ul>
             <p>Once these three tasks have been completed, your request to join the game in the Splashin app will be accepted.</p>
             <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeArOgYDeBhkbOSShnJ2X1wziuNE62g7NN-0u3Mgi5SrwZIBQ/viewform?embedded=true" width="640" height="2581" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
@@ -1052,12 +993,12 @@
     </footer>
 
     <script>
-        // Prize pool animation (rises quickly to $500)
+        // Prize pool animation
         function animatePrize() {
             const prizeEl = document.getElementById('prizeAmount');
             let current = 0;
-            const target = 500;
-            const step = Math.ceil(target / 65);
+            const target = 30; // Updated target to $30
+            const step = Math.ceil(target / 65); // Adjust step for a smoother animation
             
             const timer = setInterval(() => {
                 current += step;
@@ -1066,7 +1007,7 @@
                     clearInterval(timer);
                 }
                 prizeEl.textContent = '$' + current;
-            }, 28);
+            }, 28); // Animation speed
         }
 
         // Countdown function 
@@ -1092,8 +1033,7 @@
         }
 
         window.onload = () => {
-            // Prize pool is now static at $0 with the updated message
-            // animatePrize(); // Keep this commented out as per instructions
+            animatePrize(); // Call animation on load
             
             updateCountdown(); // Call once immediately to show countdown without delay
             setInterval(updateCountdown, 1000); // Update countdown every second
