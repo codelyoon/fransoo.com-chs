@@ -134,11 +134,12 @@
             color: white;
         }
         .recent-additions-list {
-            max-height: 150px; /* Fixed height for scrollability */
+            max-height: calc(3 * 1.5em + 2 * 5px + 2 * 3px); /* Approx height for 3 rows: 3*line-height + 2*margin-bottom + 2*padding-bottom */
             overflow-y: auto; /* Enable vertical scrolling */
             padding-right: 10px; /* Space for scrollbar */
             list-style: none; /* Remove default list styling */
             padding-left: 0;
+            margin-bottom: 0; /* Remove default ul margin */
         }
         .addition-item {
             display: flex;
@@ -148,6 +149,7 @@
             margin-bottom: 5px;
             padding-bottom: 3px;
             border-bottom: 1px dashed rgba(255,255,255,0.2);
+            line-height: 1.5em; /* Ensure consistent row height */
         }
         .addition-item:last-of-type {
             border-bottom: none;
@@ -157,6 +159,9 @@
             flex-grow: 1; /* Allows name to take up available space */
             text-align: left;
             margin-right: 10px; /* Space between name and amount */
+            white-space: nowrap; /* Prevent name from wrapping */
+            overflow: hidden; /* Hide overflow for long names */
+            text-overflow: ellipsis; /* Add ellipsis for hidden names */
         }
         .addition-amount {
             color: var(--sun-yellow);
@@ -538,7 +543,11 @@
             <div class="recent-additions-label">RECENT ADDITIONS</div>
             <ul class="recent-additions-list">
                 <li class="addition-item">
-                    <span class="addition-name">Henry Fransoo - Entry Fee</span>
+                    <span class="addition-name">Jordana White - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Singh Praseutsith - Entry Fee</span>
                     <span class="addition-amount">+$10</span>
                 </li>
                 <li class="addition-item">
@@ -546,7 +555,7 @@
                     <span class="addition-amount">+$10</span>
                 </li>
                 <li class="addition-item">
-                    <span class="addition-name">Singh Praseutsith - Entry Fee</span>
+                    <span class="addition-name">Henry Fransoo - Entry Fee</span>
                     <span class="addition-amount">+$10</span>
                 </li>
             </ul>
@@ -997,7 +1006,7 @@
         function animatePrize() {
             const prizeEl = document.getElementById('prizeAmount');
             let current = 0;
-            const target = 30; // Updated target to $30
+            const target = 40; // Updated target to $40
             const step = Math.ceil(target / 65); // Adjust step for a smoother animation
             
             const timer = setInterval(() => {
