@@ -536,12 +536,16 @@
         <div class="prize-container">
             <div class="prize-label">TOTAL PRIZE POOL 🏆</div>
             <div id="prizeAmount">$0</div>
-            <p class="prize-update-note">Last updated: April 3, 6:55PM</p>
+            <p class="prize-update-note">Last updated: April 4, 3:45PM</p>
         </div>
 
         <div class="recent-additions-container">
             <div class="recent-additions-label">RECENT ADDITIONS</div>
             <ul class="recent-additions-list">
+                <li class="addition-item">
+                    <span class="addition-name">Punita Promcharoenwatana - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
                 <li class="addition-item">
                     <span class="addition-name">Danika Lyttle - Entry Fee</span>
                     <span class="addition-amount">+$10</span>
@@ -740,7 +744,7 @@
             </div>
             <div class="rule-content">
                 <img src="https://raw.githubusercontent.com/codelyoon/fransoo.com-chs/main/IMG_7798.jpg" alt="Map showing safe zones and boundaries" />
-                <p><strong>School Grounds (Red Zone):</strong></p>
+                <p><strong>School Grounds (Red Zone):</b></p>
                 <ul>
                     <li>Everything inside the red boundary lines shown in the map/photo is a safe zone (no eliminations)</li>
                 </ul>
@@ -1064,7 +1068,7 @@
         function animatePrize() {
             const prizeEl = document.getElementById('prizeAmount');
             let current = 0;
-            const target = 140; // Updated target to $140
+            const target = 150; // Updated target to $150
             const step = Math.ceil(target / 65); // Adjust step for a smoother animation
             
             const timer = setInterval(() => {
