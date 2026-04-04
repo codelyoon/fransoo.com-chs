@@ -536,12 +536,20 @@
         <div class="prize-container">
             <div class="prize-label">TOTAL PRIZE POOL 🏆</div>
             <div id="prizeAmount">$0</div>
-            <p class="prize-update-note">Last updated: April 2nd, 12:15PM</p>
+            <p class="prize-update-note">Last updated: April 3, 6:55PM</p>
         </div>
 
         <div class="recent-additions-container">
             <div class="recent-additions-label">RECENT ADDITIONS</div>
             <ul class="recent-additions-list">
+                <li class="addition-item">
+                    <span class="addition-name">Danika Lyttle - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Ellie Swan - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
                 <li class="addition-item">
                     <span class="addition-name">Ronin Lefebvre - Entry Fee</span>
                     <span class="addition-amount">+$10</span>
@@ -918,7 +926,7 @@
             </div>
             <div class="rule-content">
                 <p><strong>(Normal Revives)</strong> There are a limited number of revives available, and these will be randomly placed at various geographical locations for players to discover and claim.</p>
-                <p><strong>(Paid Revives)</strong> However, within the first two weeks of the game, to help ramp up the prize pool, we are offering an expensive choice of a revive for $50. This guarantees you will be back in the game immediately after payment is received. After the first two weeks, these guaranteed revives will no longer be offered as the game narrows down, and and it will not be fair to others.</p>
+                <p><strong>(Paid Revives)</b> However, within the first two weeks of the game, to help ramp up the prize pool, we are offering an expensive choice of a revive for $50. This guarantees you will be back in the game immediately after payment is received. After the first two weeks, these guaranteed revives will no longer be offered as the game narrows down, and and it will not be fair to others.</p>
                 <p>For paid revives only:</p>
                 <ul>
                     <li>Each player has the opportunity to buy 1 paid revive total for the entire game.</li>
@@ -1056,7 +1064,7 @@
         function animatePrize() {
             const prizeEl = document.getElementById('prizeAmount');
             let current = 0;
-            const target = 120; // Updated target to $120
+            const target = 140; // Updated target to $140
             const step = Math.ceil(target / 65); // Adjust step for a smoother animation
             
             const timer = setInterval(() => {
