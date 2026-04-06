@@ -17,6 +17,9 @@
             --translucent-blue: rgba(0, 119, 182, 0.75);
             --header-blue: rgba(0, 119, 182, 0.9);
             --footer-blue: rgba(0, 55, 90, 0.8);
+            --team-blue-highlight: #0077b6; /* A slightly darker blue for the team box border */
+            --team-bullet-green: #33ff33; /* Green for active players */
+            --team-bullet-red: #ff3333; /* Red for eliminated players */
         }
 
         * {
@@ -169,6 +172,74 @@
             white-space: nowrap; /* Prevent amount from wrapping */
         }
         .recent-additions-note {
+            font-size: 0.75rem;
+            opacity: 0.7;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        /* Registered Teams */
+        .registered-teams-container {
+            background: rgba(255,255,255,0.2);
+            border: 5px solid var(--team-blue-highlight); /* Blue highlight for registered teams */
+            border-radius: 25px;
+            padding: 15px 20px;
+            max-width: 420px;
+            margin: 15px auto 15px auto;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        .registered-teams-label {
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            color: white;
+        }
+        .registered-teams-list {
+            max-height: 250px; /* Fixed height for scrollability */
+            overflow-y: auto;
+            padding-right: 10px;
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 0;
+            text-align: left; /* Align list items to the left */
+        }
+        .team-item {
+            margin-bottom: 10px; /* Space between teams */
+            padding-bottom: 8px; /* Padding for the bottom of each team block */
+            border-bottom: 1px dashed rgba(255,255,255,0.2);
+        }
+        .team-item:last-of-type {
+            border-bottom: none;
+        }
+        .team-name {
+            font-weight: bold;
+            font-size: 1rem;
+            color: white; /* Team name in white */
+            margin-bottom: 5px;
+            text-align: left;
+        }
+        .team-member {
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+            margin-bottom: 3px;
+            text-align: left;
+        }
+        .team-member:last-of-type {
+            margin-bottom: 0;
+        }
+        .team-bullet {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--team-bullet-green); /* Green bullet point */
+            margin-right: 8px;
+            flex-shrink: 0; /* Prevent shrinking */
+        }
+        .registered-teams-note {
             font-size: 0.75rem;
             opacity: 0.7;
             margin-top: 10px;
@@ -606,6 +677,53 @@
             <p class="recent-additions-note">[This section will show the latest contributions to the prize pool (ex: entry fees, paid revives, etc.).]</p>
         </div>
 
+        <div class="registered-teams-container">
+            <div class="registered-teams-label">TEAMS/PLAYERS LIST</div>
+            <ul class="registered-teams-list">
+                <li class="team-item">
+                    <div class="team-name">Black Bandits</div>
+                    <div class="team-member"><span class="team-bullet"></span>Broden Duncan</div>
+                    <div class="team-member"><span class="team-bullet"></span>Dax Thom</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Burst Control</div>
+                    <div class="team-member"><span class="team-bullet"></span>Ellie Swan</div>
+                    <div class="team-member"><span class="team-bullet"></span>Danika Lyttle</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Elimination Nation</div>
+                    <div class="team-member"><span class="team-bullet"></span>Henry Fransoo</div>
+                    <div class="team-member"><span class="team-bullet"></span>Nate Maclure</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Grave Diggers</div>
+                    <div class="team-member"><span class="team-bullet"></span>Singh Praseutsith</div>
+                    <div class="team-member"><span class="team-bullet"></span>Ronin Lefebvre</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Khaleel Sheikh</div>
+                    <div class="team-member"><span class="team-bullet"></span>Elliot Kirk</div>
+                    <div class="team-member"><span class="team-bullet"></span>TBD</div> <!-- Placeholder -->
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Silent but Deadly</div>
+                    <div class="team-member"><span class="team-bullet"></span>Haydhen Murray</div>
+                    <div class="team-member"><span class="team-bullet"></span>Rachel Kinch</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Wet Bandits</div>
+                    <div class="team-member"><span class="team-bullet"></span>Jack Wolbaum</div>
+                    <div class="team-member"><span class="team-bullet"></span>Logan Morton</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Young Ho's</div>
+                    <div class="team-member"><span class="team-bullet"></span>Jordana White</div>
+                    <div class="team-member"><span class="team-bullet"></span>TBD</div> <!-- Placeholder -->
+                </li>
+            </ul>
+            <p class="registered-teams-note">Green bullet = In Game | Red bullet = Eliminated</p>
+        </div>
+
         <div class="countdown-container">
             <div class="countdown-label">COUNTDOWN UNTIL START DATE ⏱️</div>
             <span id="countdownTimer">TBD</span>
@@ -1007,7 +1125,7 @@
             
             <p>&nbsp;</p> <!-- Added space -->
 
-            <p><strong>How to pay:</strong></p>
+            <p><strong>How to pay:</b></p>
             
             <p>&nbsp;</p> <!-- Added space -->
 
@@ -1068,7 +1186,7 @@
         function animatePrize() {
             const prizeEl = document.getElementById('prizeAmount');
             let current = 0;
-            const target = 150; // Updated target to $150
+            const target = 150; // Current prize pool total
             const step = Math.ceil(target / 65); // Adjust step for a smoother animation
             
             const timer = setInterval(() => {
