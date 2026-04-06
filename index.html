@@ -231,19 +231,42 @@
         .team-member:last-of-type {
             margin-bottom: 0;
         }
-        .team-bullet {
+        /* New classes for colored bullets */
+        .bullet-green {
+            background-color: var(--team-bullet-green);
+        }
+        .bullet-red {
+            background-color: var(--team-bullet-red);
+        }
+        .team-bullet { /* Base style for all bullets */
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background-color: var(--team-bullet-green); /* Green bullet point */
             margin-right: 8px;
             flex-shrink: 0; /* Prevent shrinking */
+            display: inline-block; /* Ensure it behaves like a line item */
+            vertical-align: middle; /* Align vertically with text */
         }
         .registered-teams-note {
             font-size: 0.75rem;
             opacity: 0.7;
             margin-top: 10px;
             font-style: italic;
+        }
+        .status-legend-item {
+            display: flex;
+            align-items: center;
+            margin-top: 5px;
+        }
+        .status-legend-item .team-bullet {
+            margin-right: 5px;
+        }
+        .status-update-info {
+            font-size: 0.75rem;
+            opacity: 0.7;
+            margin-top: 10px;
+            font-style: italic;
+            text-align: left;
         }
 
         /* Countdown */
@@ -682,46 +705,48 @@
             <ul class="registered-teams-list">
                 <li class="team-item">
                     <div class="team-name">Black Bandits</div>
-                    <div class="team-member"><span class="team-bullet"></span>Broden Duncan</div>
-                    <div class="team-member"><span class="team-bullet"></span>Dax Thom</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Broden Duncan</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Dax Thom</div>
                 </li>
                 <li class="team-item">
                     <div class="team-name">Burst Control</div>
-                    <div class="team-member"><span class="team-bullet"></span>Ellie Swan</div>
-                    <div class="team-member"><span class="team-bullet"></span>Danika Lyttle</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Ellie Swan</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Danika Lyttle</div>
                 </li>
                 <li class="team-item">
                     <div class="team-name">Elimination Nation</div>
-                    <div class="team-member"><span class="team-bullet"></span>Henry Fransoo</div>
-                    <div class="team-member"><span class="team-bullet"></span>Nate Maclure</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Henry Fransoo</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Nate Maclure</div>
                 </li>
                 <li class="team-item">
                     <div class="team-name">Grave Diggers</div>
-                    <div class="team-member"><span class="team-bullet"></span>Singh Praseutsith</div>
-                    <div class="team-member"><span class="team-bullet"></span>Ronin Lefebvre</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Singh Praseutsith</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Ronin Lefebvre</div>
                 </li>
                 <li class="team-item">
                     <div class="team-name">Khaleel Sheikh</div>
-                    <div class="team-member"><span class="team-bullet"></span>Elliot Kirk</div>
-                    <div class="team-member"><span class="team-bullet"></span>TBD</div> <!-- Placeholder -->
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Elliot Kirk</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>TBD</div> <!-- Placeholder -->
                 </li>
                 <li class="team-item">
                     <div class="team-name">Silent but Deadly</div>
-                    <div class="team-member"><span class="team-bullet"></span>Haydhen Murray</div>
-                    <div class="team-member"><span class="team-bullet"></span>Rachel Kinch</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Haydhen Murray</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Rachel Kinch</div>
                 </li>
                 <li class="team-item">
                     <div class="team-name">Wet Bandits</div>
-                    <div class="team-member"><span class="team-bullet"></span>Jack Wolbaum</div>
-                    <div class="team-member"><span class="team-bullet"></span>Logan Morton</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Jack Wolbaum</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Logan Morton</div>
                 </li>
                 <li class="team-item">
                     <div class="team-name">Young Ho's</div>
-                    <div class="team-member"><span class="team-bullet"></span>Jordana White</div>
-                    <div class="team-member"><span class="team-bullet"></span>TBD</div> <!-- Placeholder -->
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Jordana White</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>TBD</div> <!-- Placeholder -->
                 </li>
             </ul>
-            <p class="registered-teams-note">Green bullet = In Game | Red bullet = Eliminated</p>
+            <div class="status-legend-item"><span class="team-bullet bullet-green"></span> Green bullet = In Game</div>
+            <div class="status-legend-item" style="margin-bottom: 5px;"><span class="team-bullet bullet-red"></span> Red bullet = Eliminated</div>
+            <p class="status-update-info">Elimination statuses will be updated 1-2 times per day once the game starts. For live immediate updates, please look at the Splashin app.</p>
         </div>
 
         <div class="countdown-container">
