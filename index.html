@@ -629,13 +629,17 @@
         
         <div class="prize-container">
             <div class="prize-label">TOTAL PRIZE POOL 🏆</div>
-            <div id="prizeAmount">$190</div>
-            <p class="prize-update-note">Last updated: April 6, 5:50PM</p>
+            <div id="prizeAmount">$200</div>
+            <p class="prize-update-note">Last updated: April 6, 9:50PM</p>
         </div>
 
         <div class="recent-additions-container">
             <div class="recent-additions-label">RECENT ADDITIONS</div>
             <ul class="recent-additions-list">
+                <li class="addition-item">
+                    <span class="addition-name">Sawyer Link - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
                 <li class="addition-item">
                     <span class="addition-name">Aedan Carnegie - Entry Fee</span>
                     <span class="addition-amount">+$10</span>
@@ -752,7 +756,7 @@
                 <li class="team-item">
                     <div class="team-name">Look out for Fergus</div>
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Aedan Carnegie</div>
-                    <div class="team-member"><span class="team-bullet bullet-green"></span>TBD</div> <!-- Placeholder -->
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Sawyer Link</div>
                 </li>
                 <li class="team-item">
                     <div class="team-name">Sakib</div>
@@ -1082,6 +1086,7 @@
         <div class="rule-item">
             <div class="rule-header">
                 <span class="number">14.</span>
+                <span class="title-text">🚨 Conduct Rules</span>
                 <span class="toggle-icon">+</span>
             </div>
             <div class="rule-content">
@@ -1241,7 +1246,7 @@
         function animatePrize() {
             const prizeEl = document.getElementById('prizeAmount');
             let current = 0;
-            const target = 190; // Current prize pool total
+            const target = 200; // Current prize pool total
             const step = Math.ceil(target / 65); // Adjust step for a smoother animation
             
             const timer = setInterval(() => {
