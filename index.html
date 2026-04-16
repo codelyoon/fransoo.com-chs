@@ -629,13 +629,17 @@
         
         <div class="prize-container">
             <div class="prize-label">TOTAL PRIZE POOL 🏆</div>
-            <div id="prizeAmount">$370</div>
-            <p class="prize-update-note">Last updated: April 15, 1:25PM</p>
+            <div id="prizeAmount">$380</div>
+            <p class="prize-update-note">Last updated: April 15, 7:15PM</p>
         </div>
 
         <div class="recent-additions-container">
             <div class="recent-additions-label">RECENT ADDITIONS</div>
             <ul class="recent-additions-list">
+                <li class="addition-item">
+                    <span class="addition-name">Hunter Sawatsky - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
                 <li class="addition-item">
                     <span class="addition-name">Avery Lange - Entry Fee</span>
                     <span class="addition-amount">+$10</span>
@@ -812,11 +816,6 @@
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Nate Maclure</div>
                 </li>
                 <li class="team-item">
-                    <div class="team-name">Elle and Becca</div>
-                    <div class="team-member"><span class="team-bullet bullet-green"></span>Elle Johnston</div>
-                    <div class="team-member"><span class="team-bullet bullet-green"></span>Becca Neutens</div> <!-- Placeholder -->
-                </li>
-                <li class="team-item">
                     <div class="team-name">Emma and Punita</div>
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Emma Gauthier</div>
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Punita Promcharoenwatana</div> <!-- Placeholder -->
@@ -862,9 +861,19 @@
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Rachel Kinch</div>
                 </li>
                 <li class="team-item">
+                    <div class="team-name">Soaked and Dangerous</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Elle Johnston</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Becca Neutens</div> <!-- Placeholder -->
+                </li>
+                <li class="team-item">
                     <div class="team-name">Squirt Squad</div>
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Julia Sawyshyn</div>
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Hudson Huybrecht</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Squirting Steven</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Hunter Sawatsky</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>TBD</div> <!-- Placeholder -->
                 </li>
                 <li class="team-item">
                     <div class="team-name">The dirty girls</div>
@@ -1359,7 +1368,7 @@
         function animatePrize() {
             const prizeEl = document.getElementById('prizeAmount');
             let current = 0;
-            const target = 370; // Current prize pool total
+            const target = 380; // Current prize pool total
             const step = Math.ceil(target / 65); // Adjust step for a smoother animation
             
             const timer = setInterval(() => {
