@@ -629,7 +629,7 @@
         
         <div class="prize-container">
             <div class="prize-label">TOTAL PRIZE POOL 🏆</div>
-            <div id="prizeAmount">$540</div>
+            <div id="prizeAmount">$550</div>
             <p class="prize-update-note">Last updated: April 16, 6:55PM</p>
         </div>
 
@@ -666,6 +666,10 @@
                 </li>
                 <li class="addition-item">
                     <span class="addition-name">Willow Kabanuk - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Izaac Hooper - Entry Fee</span>
                     <span class="addition-amount">+$10</span>
                 </li>
                 <li class="addition-item">
@@ -955,9 +959,9 @@
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Willow Kabanuk</div> <!-- Placeholder -->
                 </li>
                 <li class="team-item">
-                    <div class="team-name">Squirt Meisters</div>
+                    <div class="team-name">Squirt Meister's</div>
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Matthew Loewen</div>
-                    <div class="team-member"><span class="team-bullet bullet-green"></span>TBD</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Izaac Hooper</div>
                 </li>
                 <li class="team-item">
                     <div class="team-name">Squirt Squad</div>
@@ -1477,7 +1481,7 @@
         function animatePrize() {
             const prizeEl = document.getElementById('prizeAmount');
             let current = 0;
-            const target = 540; // Current prize pool total
+            const target = 550; // Current prize pool total
             const step = Math.ceil(target / 65); // Adjust step for a smoother animation
             
             const timer = setInterval(() => {
