@@ -629,13 +629,21 @@
         
         <div class="prize-container">
             <div class="prize-label">TOTAL PRIZE POOL 🏆</div>
-            <div id="prizeAmount">$580</div>
-            <p class="prize-update-note">Last updated: April 17, 2:13PM</p>
+            <div id="prizeAmount">$600</div>
+            <p class="prize-update-note">Last updated: April 18, 10:10AM</p>
         </div>
 
         <div class="recent-additions-container">
             <div class="recent-additions-label">RECENT ADDITIONS</div>
             <ul class="recent-additions-list">
+                <li class="addition-item">
+                    <span class="addition-name">Calleigh Mclane - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Saylor Muehlenberg - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
                 <li class="addition-item">
                     <span class="addition-name">Anna Pace - Entry Fee</span>
                     <span class="addition-amount">+$10</span>
@@ -876,11 +884,6 @@
             <div class="registered-teams-label">TEAMS/PLAYERS LIST</div>
             <ul class="registered-teams-list">
                 <li class="team-item">
-                    <div class="team-name">Black Bandits</div>
-                    <div class="team-member"><span class="team-bullet bullet-green"></span>Broden Duncan</div>
-                    <div class="team-member"><span class="team-bullet bullet-green"></span>Dax Thom</div>
-                </li>
-                <li class="team-item">
                     <div class="team-name">Blonde Blasters</div>
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Avery Lange</div>
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Jeah Heller</div>
@@ -936,9 +939,19 @@
                     <div class="team-member"><span class="team-bullet bullet-green"></span>TBD</div> <!-- Placeholder -->
                 </li>
                 <li class="team-item">
+                    <div class="team-name">Liquid Legends</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Saylor Muehlenberg</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Calleigh Mclane</div>
+                </li>
+                <li class="team-item">
                     <div class="team-name">Look out for Fergus</div>
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Aedan Carnegie</div>
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Sawyer Link</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Mac and Wheeze</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Noah White</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Emma MacKinnon</div> <!-- Placeholder -->
                 </li>
                 <li class="team-item">
                     <div class="team-name">Sakib</div>
@@ -959,6 +972,11 @@
                     <div class="team-name">Soaked and Dangerous</div>
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Elle Johnston</div>
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Becca Neutens</div> <!-- Placeholder -->
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Soaked & Stuffed</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Broden Duncan</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Dax Thom</div>
                 </li>
                 <li class="team-item">
                     <div class="team-name">Sophia and Caebri</div>
@@ -999,11 +1017,6 @@
                     <div class="team-name">The Finger Bangers</div>
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Carston Swan</div>
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Tanner Edmunds</div>
-                </li>
-                <li class="team-item">
-                    <div class="team-name">The MacWhites</div>
-                    <div class="team-member"><span class="team-bullet bullet-green"></span>Noah White</div>
-                    <div class="team-member"><span class="team-bullet bullet-green"></span>Emma MacKinnon</div> <!-- Placeholder -->
                 </li>
                 <li class="team-item">
                     <div class="team-name">Wet Bandits</div>
@@ -1498,7 +1511,7 @@
         function animatePrize() {
             const prizeEl = document.getElementById('prizeAmount');
             let current = 0;
-            const target = 580; // Current prize pool total
+            const target = 600; // Current prize pool total
             const step = Math.ceil(target / 65); // Adjust step for a smoother animation
             
             const timer = setInterval(() => {
