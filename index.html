@@ -629,13 +629,25 @@
         
         <div class="prize-container">
             <div class="prize-label">TOTAL PRIZE POOL 🏆</div>
-            <div id="prizeAmount">$600</div>
+            <div id="prizeAmount">$630</div>
             <p class="prize-update-note">Last updated: April 18, 10:10AM</p>
         </div>
 
         <div class="recent-additions-container">
             <div class="recent-additions-label">RECENT ADDITIONS</div>
             <ul class="recent-additions-list">
+                <li class="addition-item">
+                    <span class="addition-name">Eli Fitzsimmons - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Maysa Nicoll - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Jayden Vandenberg - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
                 <li class="addition-item">
                     <span class="addition-name">Calleigh Mclane - Entry Fee</span>
                     <span class="addition-amount">+$10</span>
@@ -884,6 +896,11 @@
             <div class="registered-teams-label">TEAMS/PLAYERS LIST</div>
             <ul class="registered-teams-list">
                 <li class="team-item">
+                    <div class="team-name">Aquaholics</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Maysa Nicoll</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Jayden Vandenberg</div>
+                </li>
+                <li class="team-item">
                     <div class="team-name">Blonde Blasters</div>
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Avery Lange</div>
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Jeah Heller</div>
@@ -987,6 +1004,11 @@
                     <div class="team-name">Splash pack</div>
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Georgia Polhill</div>
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Willow Kabanuk</div> <!-- Placeholder -->
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Squirt and destroy</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Eli Fitzsimmons</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>TBD</div>
                 </li>
                 <li class="team-item">
                     <div class="team-name">Squirt Meister's</div>
@@ -1517,7 +1539,7 @@
         function animatePrize() {
             const prizeEl = document.getElementById('prizeAmount');
             let current = 0;
-            const target = 600; // Current prize pool total
+            const target = 630; // Current prize pool total
             const step = Math.ceil(target / 65); // Adjust step for a smoother animation
             
             const timer = setInterval(() => {
