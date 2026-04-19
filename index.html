@@ -1540,7 +1540,7 @@
             const prizeEl = document.getElementById('prizeAmount');
             let current = 0;
             const target = 630; // Current prize pool total
-            const step = Math.ceil(target / 65); // Adjust step for a smoother animation
+            const step = Math.ceil(target / 150); // Adjust step for a smoother animation
             
             const timer = setInterval(() => {
                 current += step;
@@ -1549,7 +1549,7 @@
                     clearInterval(timer);
                 }
                 prizeEl.textContent = '$' + current;
-            }, 28); // Animation speed
+            }, 50); // Animation speed
         }
 
         // Countdown function 
