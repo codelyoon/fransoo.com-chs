@@ -629,8 +629,8 @@
         
         <div class="prize-container">
             <div class="prize-label">TOTAL PRIZE POOL 🏆</div>
-            <div id="prizeAmount">$730</div>
-            <p class="prize-update-note">Last updated: April 21, 5:15PM</p>
+            <div id="prizeAmount">$750</div>
+            <p class="prize-update-note">Last updated: April 21, 9:05PM</p>
         </div>
 
         <div class="recent-additions-container">
@@ -638,6 +638,14 @@
             <ul class="recent-additions-list">
                 <li class="addition-item">
                     <span class="addition-name">Quinn Derricott - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Carly Abougoush - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Hannah Deitz - Entry Fee</span>
                     <span class="addition-amount">+$10</span>
                 </li>
                 <li class="addition-item">
@@ -946,6 +954,11 @@
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Jeah Heller</div>
                 </li>
                 <li class="team-item">
+                    <div class="team-name">Bubble Guppies</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Hannah Deitz</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Carly Abougoush</div>
+                </li>
+                <li class="team-item">
                     <div class="team-name">Burst Control</div>
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Ellie Swan</div>
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Danika Lyttle</div>
@@ -964,11 +977,6 @@
                     <div class="team-name">Elimination Nation</div>
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Henry Fransoo</div>
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Nate Maclure</div>
-                </li>
-                <li class="team-item">
-                    <div class="team-name">Emma and Punita</div>
-                    <div class="team-member"><span class="team-bullet bullet-green"></span>Emma Gauthier</div>
-                    <div class="team-member"><span class="team-bullet bullet-green"></span>Punita Promcharoenwatana</div> <!-- Placeholder -->
                 </li>
                 <li class="team-item">
                     <div class="team-name">Grave Diggers</div>
@@ -1109,6 +1117,11 @@
                     <div class="team-name">Wet Bandits</div>
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Jack Wolbaum</div>
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Logan Morton</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Wet chicks</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Emma Gauthier</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Punita Promcharoenwatana</div> <!-- Placeholder -->
                 </li>
                 <li class="team-item">
                     <div class="team-name">Wet intentions</div>
@@ -1604,7 +1617,7 @@
         function animatePrize() {
             const prizeEl = document.getElementById('prizeAmount');
             let current = 0;
-            const target = 730; // Current prize pool total
+            const target = 750; // Current prize pool total
             const step = Math.ceil(target / 65); // Adjust step for a smoother animation
             
             const timer = setInterval(() => {
