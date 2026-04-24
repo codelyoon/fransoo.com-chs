@@ -629,12 +629,24 @@
         
         <div class="prize-container">
             <div class="prize-label">TOTAL PRIZE POOL 🏆</div>
-            <div id="prizeAmount">$1020</div>
-            <p class="prize-update-note">Last updated: April 25, 11:08AM</p>
+            <div id="prizeAmount">$1040</div>
+            <p class="prize-update-note">Last updated: April 25, 12:06PM</p>
         </div>
         <div class="recent-additions-container">
             <div class="recent-additions-label">RECENT ADDITIONS</div>
             <ul class="recent-additions-list">
+                <li class="addition-item">
+                    <span class="addition-name">Zachary Cristea - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Aran Khanna - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Spenser Derksen - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
                 <li class="addition-item">
                     <span class="addition-name">Sakib Sheikh - Entry Fee</span>
                     <span class="addition-amount">+$10</span>
@@ -1241,6 +1253,11 @@
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Miley Doell</div> <!-- Placeholder -->
                 </li>
                 <li class="team-item">
+                    <div class="team-name">The Damp Dynasty</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Spenser Derksen</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>TBD</div>
+                </li>
+                <li class="team-item">
                     <div class="team-name">The dirty girls</div>
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Xander Manolakas</div>
                     <div class="team-member"><span class="team-bullet bullet-green"></span>AJ Laurell</div>
@@ -1790,7 +1807,7 @@
         function animatePrize() {
             const prizeEl = document.getElementById('prizeAmount');
             let current = 0;
-            const target = 1020; // Current prize pool total
+            const target = 1040; // Current prize pool total
             const step = Math.ceil(target / 65); // Adjust step for a smoother animation
             
             const timer = setInterval(() => {
