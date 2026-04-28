@@ -629,12 +629,28 @@
         
         <div class="prize-container">
             <div class="prize-label">TOTAL PRIZE POOL 🏆</div>
-            <div id="prizeAmount">$1170</div>
-            <p class="prize-update-note">Last updated: April 28, 11:32AM</p>
+            <div id="prizeAmount">$1210</div>
+            <p class="prize-update-note">Last updated: April 28, 12:32PM</p>
         </div>
         <div class="recent-additions-container">
             <div class="recent-additions-label">RECENT ADDITIONS</div>
             <ul class="recent-additions-list">
+                <li class="addition-item">
+                    <span class="addition-name">Katelyn Bridge - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Kira Giesbrecht - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Avree Colling - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Gemma Kosheluk - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
                 <li class="addition-item">
                     <span class="addition-name">Marlo Kravets - Entry Fee</span>
                     <span class="addition-amount">+$10</span>
@@ -1163,6 +1179,11 @@
                     <div class="team-name">Elimination Nation</div>
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Henry Fransoo</div>
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Nate Maclure</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Flow State</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Kira Giesbrecht</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Katelyn Bridge</div>
                 </li>
                 <li class="team-item">
                     <div class="team-name">Grave Diggers</div>
@@ -1890,7 +1911,7 @@
         function animatePrize() {
             const prizeEl = document.getElementById('prizeAmount');
             let current = 0;
-            const target = 1170; // Current prize pool total
+            const target = 1210; // Current prize pool total
             const step = Math.ceil(target / 65); // Adjust step for a smoother animation
             
             const timer = setInterval(() => {
