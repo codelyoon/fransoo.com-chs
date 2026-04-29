@@ -629,12 +629,16 @@
         
         <div class="prize-container">
             <div class="prize-label">TOTAL PRIZE POOL 🏆</div>
-            <div id="prizeAmount">$1260</div>
-            <p class="prize-update-note">Last updated: April 28, 4:40PM</p>
+            <div id="prizeAmount">$1270</div>
+            <p class="prize-update-note">Last updated: April 28, 8:52PM</p>
         </div>
         <div class="recent-additions-container">
             <div class="recent-additions-label">RECENT ADDITIONS</div>
             <ul class="recent-additions-list">
+                <li class="addition-item">
+                    <span class="addition-name">Jackson Hughes - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
                 <li class="addition-item">
                     <span class="addition-name">Amelia Schmitt - Entry Fee</span>
                     <span class="addition-amount">+$10</span>
@@ -1397,7 +1401,7 @@
                 <li class="team-item">
                     <div class="team-name">The Easy Targets</div>
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Brock Van de Kraats</div>
-                    <div class="team-member"><span class="team-bullet bullet-green"></span>TBD</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Jackson Hughes</div>
                 </li>
                 <li class="team-item">
                     <div class="team-name">The Finger Blasters</div>
@@ -1955,7 +1959,7 @@
         function animatePrize() {
             const prizeEl = document.getElementById('prizeAmount');
             let current = 0;
-            const target = 1260; // Current prize pool total
+            const target = 1270; // Current prize pool total
             const step = Math.ceil(target / 65); // Adjust step for a smoother animation
             
             const timer = setInterval(() => {
