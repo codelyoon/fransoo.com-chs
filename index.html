@@ -629,12 +629,24 @@
         
         <div class="prize-container">
             <div class="prize-label">TOTAL PRIZE POOL 🏆</div>
-            <div id="prizeAmount">$1450</div>
-            <p class="prize-update-note">Last updated: May 1, 8:00AM</p>
+            <div id="prizeAmount">$1480</div>
+            <p class="prize-update-note">Last updated: May 1, 11:11AM</p>
         </div>
         <div class="recent-additions-container">
             <div class="recent-additions-label">RECENT ADDITIONS</div>
             <ul class="recent-additions-list">
+                <li class="addition-item">
+                    <span class="addition-name">Carter Walsh - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Anthony Omoifo - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Raimo Sollitt - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
                 <li class="addition-item">
                     <span class="addition-name">Julien Fournier - Entry Fee</span>
                     <span class="addition-amount">+$10</span>
@@ -1386,6 +1398,11 @@
                     <div class="team-member"><span class="team-bullet bullet-green"></span>TBD</div> <!-- Placeholder -->
                 </li>
                 <li class="team-item">
+                    <div class="team-name">rice water</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Raimo Sollitt</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>TBD</div>
+                </li>
+                <li class="team-item">
                     <div class="team-name">Sakib</div>
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Nick Walsh</div>
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Kaden Byrne</div>
@@ -1554,6 +1571,11 @@
                     <div class="team-name">Wet Bandits</div>
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Jack Wolbaum</div>
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Logan Morton</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Wet Blankets</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Carter Walsh</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>TBD</div>
                 </li>
                 <li class="team-item">
                     <div class="team-name">Wet chicks</div>
@@ -2082,7 +2104,7 @@
         function animatePrize() {
             const prizeEl = document.getElementById('prizeAmount');
             let current = 0;
-            const target = 1450; // Current prize pool total
+            const target = 1480; // Current prize pool total
             const step = Math.ceil(target / 65); // Adjust step for a smoother animation
             
             const timer = setInterval(() => {
