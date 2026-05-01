@@ -629,12 +629,32 @@
         
         <div class="prize-container">
             <div class="prize-label">TOTAL PRIZE POOL 🏆</div>
-            <div id="prizeAmount">$1480</div>
-            <p class="prize-update-note">Last updated: May 1, 11:11AM</p>
+            <div id="prizeAmount">$1530</div>
+            <p class="prize-update-note">Last updated: May 1, 1:55PM</p>
         </div>
         <div class="recent-additions-container">
             <div class="recent-additions-label">RECENT ADDITIONS</div>
             <ul class="recent-additions-list">
+                <li class="addition-item">
+                    <span class="addition-name">Ronan Neutens - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Mason Fischer-Lynn - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Keela Kerr - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Megan Petty - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Aria Spanbauer - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
                 <li class="addition-item">
                     <span class="addition-name">Carter Walsh - Entry Fee</span>
                     <span class="addition-amount">+$10</span>
@@ -1433,6 +1453,11 @@
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Quinn Derricott</div> <!-- Placeholder -->
                 </li>
                 <li class="team-item">
+                    <div class="team-name">Slippery When Wet</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Aria Spanbauer</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Keela Kerr</div> <!-- Placeholder -->
+                </li>
+                <li class="team-item">
                     <div class="team-name">Soaked and Dangerous</div>
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Elle Johnston</div>
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Becca Neutens</div> <!-- Placeholder -->
@@ -1575,12 +1600,17 @@
                 <li class="team-item">
                     <div class="team-name">Wet Blankets</div>
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Carter Walsh</div>
-                    <div class="team-member"><span class="team-bullet bullet-green"></span>TBD</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Ronan Neutens</div>
                 </li>
                 <li class="team-item">
                     <div class="team-name">Wet chicks</div>
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Emma Gauthier</div>
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Punita Promcharoenwatana</div> <!-- Placeholder -->
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Wet discharge</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Mason Fischer-Lynn</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>TBD</div> <!-- Placeholder -->
                 </li>
                 <li class="team-item">
                     <div class="team-name">Wet egg</div>
@@ -2104,7 +2134,7 @@
         function animatePrize() {
             const prizeEl = document.getElementById('prizeAmount');
             let current = 0;
-            const target = 1480; // Current prize pool total
+            const target = 1530; // Current prize pool total
             const step = Math.ceil(target / 65); // Adjust step for a smoother animation
             
             const timer = setInterval(() => {
