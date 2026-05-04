@@ -307,6 +307,45 @@
             display: block; /* Ensures it takes its own line and can be centered */
             text-shadow: 1px 1px 2px rgba(0,0,0,0.5); /* Add text shadow for emphasis */
         }
+        
+        /* Players Remaining */
+        
+                /* Players Remaining */
+        .players-remaining-container {
+            background: rgba(255,255,255,0.2);
+            border: 5px solid #33ff33; /* Green accent */
+            border-radius: 25px;
+            padding: 15px 20px;
+            max-width: 420px;
+            margin: 15px auto 15px auto;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        .players-remaining-label {
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 5px;
+            color: white;
+        }
+
+        #playersRemaining {
+            font-family: 'Impact', sans-serif;
+            font-size: 3.2rem;
+            color: #33ff33;
+            text-shadow: 3px 3px 0 #000;
+            display: block;
+        }
+
+        .players-note {
+            font-size: 1rem;
+            opacity: 1;
+            margin-top: 5px;
+            font-weight: bold;
+            color: #33ff33;
+        }
 
         /* Navigation */
         nav {
@@ -1703,11 +1742,11 @@
             <div class="status-legend-item" style="margin-bottom: 5px;"><span class="team-bullet bullet-red"></span> Red bullet = Eliminated</div>
             <p class="status-update-info">Elimination statuses will be updated 1-2 times per day once the game starts. For live immediate updates, please look at the Splashin app. (Some people may show "TBD" until fully registered)</p>
         </div>
-
-        <div class="countdown-container">
-            <div class="countdown-label">COUNTDOWN UNTIL START DATE ⏱️</div>
-            <span id="countdownTimer">TBD</span>
-            <p class="countdown-note">[May 4, 2026]</p>
+        
+                <div class="players-remaining-container">
+            <div class="players-remaining-label">PLAYERS REMAINING 👥</div>
+            <span id="playersRemaining">164</span>
+            <p class="players-note">83 teams • Game is LIVE</p>
         </div>
 
     </header>
