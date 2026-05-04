@@ -346,6 +346,65 @@
             font-weight: bold;
             color: #33ff33;
         }
+        
+        /* Recent Eliminations */
+        
+                /* Recent Eliminations */
+        .recent-eliminations-container {
+            background: rgba(255,255,255,0.2);
+            border: 5px solid var(--team-bullet-red);
+            border-radius: 25px;
+            padding: 15px 20px;
+            margin-top: 12px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        .recent-eliminations-label {
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .recent-eliminations-list {
+            max-height: 180px;
+            overflow-y: auto;
+            padding-right: 10px;
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 0;
+            text-align: left;
+        }
+
+        .elimination-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+            padding-bottom: 4px;
+            border-bottom: 1px dashed rgba(255,255,255,0.2);
+        }
+
+        .elimination-item:last-of-type {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .elimination-name {
+            flex-grow: 1;
+            text-align: left;
+            color: #ff6666;
+        }
+
+        .elimination-time {
+            color: var(--light-grey);
+            font-size: 0.8rem;
+            white-space: nowrap;
+        }
 
         /* Navigation */
         nav {
@@ -1745,8 +1804,24 @@
                 </li>
             </ul>
             <div class="status-legend-item"><span class="team-bullet bullet-green"></span> Green bullet = In Game</div>
-            <div class="status-legend-item" style="margin-bottom: 5px;"><span class="team-bullet bullet-red"></span> Red bullet = Eliminated</div>
-            <p class="status-update-info">Elimination statuses will be updated 1-2 times per day once the game starts. For live immediate updates, please look at the Splashin app. (Some people may show "TBD" until fully registered)</p>
+                        <div class="status-legend-item"><span class="team-bullet bullet-green"></span> Green bullet = In Game</div>
+            <div class="status-legend-item" style="margin-bottom: 8px;"><span class="team-bullet bullet-red"></span> Red bullet = Eliminated</div>
+
+            <!-- Recent Eliminations -->
+            <div class="recent-eliminations-container">
+                <div class="recent-eliminations-label">RECENT ELIMINATIONS ❌</div>
+                <ul class="recent-eliminations-list" id="recentEliminationsList">
+                    <!-- Example entries - replace/add as needed -->
+                    <li class="elimination-item">
+                        <span class="elimination-name">Team XYZ eliminated</span>
+                        <span class="elimination-time">Just now</span>
+                    </li>
+                    <li class="elimination-item">
+                        <span class="elimination-name">John & Bob out</span>
+                        <span class="elimination-time">2h ago</span>
+                    </li>
+                </ul>
+            </div>
         </div>
 
     </header>
