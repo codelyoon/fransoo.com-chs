@@ -727,12 +727,16 @@
         
         <div class="prize-container">
             <div class="prize-label">TOTAL PRIZE POOL 🏆</div>
-            <div id="prizeAmount">$1650</div>
+            <div id="prizeAmount">$1700</div>
             <p class="prize-update-note">Last updated: May 3, 10:40PM</p>
         </div>
         <div class="recent-additions-container">
             <div class="recent-additions-label">RECENT ADDITIONS</div>
             <ul class="recent-additions-list">
+                <li class="addition-item">
+                    <span class="addition-name">Saylor Muehlenberg - Paid Revive</span>
+                    <span class="addition-amount">+$50</span>
+                </li>
                 <li class="addition-item">
                     <span class="addition-name">Mylo Kivenko - Entry Fee</span>
                     <span class="addition-amount">+$10</span>
@@ -1391,7 +1395,7 @@
         
         <div class="players-remaining-container">
             <div class="players-remaining-label">PLAYERS REMAINING 👥</div>
-            <span id="playersRemaining">155/164</span>
+            <span id="playersRemaining">156/164</span>
             <p class="players-note">83 teams • Game is LIVE</p>
         </div>
 
@@ -1535,7 +1539,7 @@
                 </li>
                 <li class="team-item">
                     <div class="team-name">Liquid Legends</div>
-                    <div class="team-member"><span class="team-bullet bullet-red"></span>Saylor Muehlenberg</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Saylor Muehlenberg</div>
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Calleigh Mclane</div>
                 </li>
                 <li class="team-item">
@@ -1843,7 +1847,7 @@
                     </li>
                     <li class="elimination-item">
                         <span class="elimination-name">Saylor Muehlenberg</span>
-                        <span class="elimination-time">Eliminated</span>
+                        <span class="elimination-time">Revived</span>
                     </li>
                     <li class="elimination-item">
                         <span class="elimination-name">Matty Speers</span>
@@ -2288,7 +2292,7 @@
         function animatePrize() {
             const prizeEl = document.getElementById('prizeAmount');
             let current = 0;
-            const target = 1650; // Current prize pool total
+            const target = 1700; // Current prize pool total
             const step = Math.ceil(target / 65); // Adjust step for a smoother animation
             
             const timer = setInterval(() => {
