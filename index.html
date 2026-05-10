@@ -727,12 +727,16 @@
         
         <div class="prize-container">
             <div class="prize-label">TOTAL PRIZE POOL 🏆</div>
-            <div id="prizeAmount">$2150</div>
-            <p class="prize-update-note">Last updated: May 8, 10:05PM</p>
+            <div id="prizeAmount">$2200</div>
+            <p class="prize-update-note">Last updated: May 10, 7:35AM</p>
         </div>
         <div class="recent-additions-container">
             <div class="recent-additions-label">RECENT ADDITIONS</div>
             <ul class="recent-additions-list">
+                <li class="addition-item">
+                    <span class="addition-name">Rachel Kinch - Paid Revive</span>
+                    <span class="addition-amount">+$50</span>
+                </li>
                 <li class="addition-item">
                     <span class="addition-name">Singh Praseutsith - Paid Revive</span>
                     <span class="addition-amount">+$50</span>
@@ -2277,7 +2281,7 @@
         function animatePrize() {
             const prizeEl = document.getElementById('prizeAmount');
             let current = 0;
-            const target = 2150; // Current prize pool total
+            const target = 2200; // Current prize pool total
             const step = Math.ceil(target / 65); // Adjust step for a smoother animation
             
             const timer = setInterval(() => {
