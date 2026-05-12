@@ -727,12 +727,16 @@
         
         <div class="prize-container">
             <div class="prize-label">TOTAL PRIZE POOL 🏆</div>
-            <div id="prizeAmount">$2200</div>
-            <p class="prize-update-note">Last updated: May 10, 4:50PM</p>
+            <div id="prizeAmount">$2250</div>
+            <p class="prize-update-note">Last updated: May 12, 4:20PM</p>
         </div>
         <div class="recent-additions-container">
             <div class="recent-additions-label">RECENT ADDITIONS</div>
             <ul class="recent-additions-list">
+                <li class="addition-item">
+                    <span class="addition-name">Calleigh Mclane - Paid Revive</span>
+                    <span class="addition-amount">+$50</span>
+                </li>
                 <li class="addition-item">
                     <span class="addition-name">Jaxon Shapkin - Paid Revive</span>
                     <span class="addition-amount">+$50</span>
@@ -1435,8 +1439,8 @@
         
         <div class="players-remaining-container">
             <div class="players-remaining-label">PLAYERS REMAINING 👥</div>
-            <span id="playersRemaining">93/164</span>
-            <p class="players-note">51/83 teams • Game is LIVE</p>
+            <span id="playersRemaining">87/164</span>
+            <p class="players-note">Game is LIVE</p>
         </div>
 
         <div class="registered-teams-container">
@@ -1454,7 +1458,7 @@
                 </li>
                 <li class="team-item">
                     <div class="team-name">Big fe squirters</div>
-                    <div class="team-member"><span class="team-bullet bullet-green"></span>Ty Porter</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Ty Porter</div>
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Brennen Banford</div>
                 </li>
                 <li class="team-item">
@@ -1564,7 +1568,7 @@
                 </li>
                 <li class="team-item">
                     <div class="team-name">karsplashians</div>
-                    <div class="team-member"><span class="team-bullet bullet-green"></span>Liv Simpson</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Liv Simpson</div>
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Paige Kalin</div> <!-- Placeholder -->
                 </li>
                 <li class="team-item">
@@ -1704,7 +1708,7 @@
                 <li class="team-item">
                     <div class="team-name">Squirting Steven</div>
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Hunter Sawatsky</div>
-                    <div class="team-member"><span class="team-bullet bullet-green"></span>Carson Carroll</div> <!-- Placeholder -->
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Carson Carroll</div> <!-- Placeholder -->
                 </li>
                 <li class="team-item">
                     <div class="team-name">Squirtles</div>
@@ -1828,7 +1832,7 @@
                 <li class="team-item">
                     <div class="team-name">Wet'n Wild</div>
                     <div class="team-member"><span class="team-bullet bullet-green"></span>Jacob Kueber</div>
-                    <div class="team-member"><span class="team-bullet bullet-green"></span>Millie Bell</div> <!-- Placeholder -->
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Millie Bell</div> <!-- Placeholder -->
                 </li>
                 <li class="team-item">
                     <div class="team-name">Wet Willys</div>
@@ -2281,7 +2285,7 @@
         function animatePrize() {
             const prizeEl = document.getElementById('prizeAmount');
             let current = 0;
-            const target = 2200; // Current prize pool total
+            const target = 2250; // Current prize pool total
             const step = Math.ceil(target / 65); // Adjust step for a smoother animation
             
             const timer = setInterval(() => {
