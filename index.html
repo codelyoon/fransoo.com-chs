@@ -1,446 +1,2380 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SpongeBob in Egypt: Logic Escape v3</title>
-<style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
-    background: linear-gradient(180deg, #f4a460 0%, #cd853f 40%, #8b4513 100%);
-    min-height: 100vh;
-    padding: 20px;
-    color: #2c1810;
-    position: relative;
-    overflow-x: hidden;
-  }
-  body::before {
-    content: '🏜️';
-    position: fixed;
-    top: 10%;
-    right: 5%;
-    font-size: 120px;
-    opacity: 0.1;
-    z-index: 0;
-  }
-  body::after {
-    content: '🧽';
-    position: fixed;
-    bottom: 10%;
-    left: 5%;
-    font-size: 100px;
-    opacity: 0.15;
-    z-index: 0;
-    animation: float 6s ease-in-out infinite;
-  }
-  @keyframes float {
-    0%, 100% { transform: translateY(0px) rotate(-5deg); }
-    50% { transform: translateY(-20px) rotate(5deg); }
-  }
-.container { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
-.header {
-    background: rgba(255, 235, 59, 0.95);
-    backdrop-filter: blur(10px);
-    border: 4px solid #2c1810;
-    border-radius: 15px;
-    padding: 20px;
-    text-align: center;
-    margin-bottom: 20px;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.4);
-  }
-.pyramid-svg {
-    width: 100%;
-    height: 60px;
-    margin-bottom: 10px;
-  }
-  h1 { font-size: 28px; margin-bottom: 10px; }
-.water-meter {
-    background: #2c1810;
-    border-radius: 20px;
-    height: 30px;
-    overflow: hidden;
-    margin: 10px 0;
-    border: 3px solid #2c1810;
-  }
-.water-fill {
-    background: linear-gradient(90deg, #2196f3, #4fc3f7);
-    height: 100%;
-    transition: width 0.5s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: bold;
-  }
-.puzzle {
-    background: rgba(245, 222, 179, 0.95);
-    backdrop-filter: blur(5px);
-    border: 4px solid #2c1810;
-    border-radius: 15px;
-    padding: 20px;
-    margin-bottom: 20px;
-    display: none;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  }
-.puzzle.active { display: block; }
-.puzzle h2 { color: #8b4513; margin-bottom: 15px; font-size: 22px; }
-.story {
-    background: #fff8dc;
-    padding: 12px;
-    border-left: 4px solid #ff9800;
-    margin: 10px 0;
-    border-radius: 5px;
-  }
-.input-group { margin: 15px 0; }
-  input[type="text"], input[type="number"] {
-    width: 100%;
-    padding: 12px;
-    font-size: 18px;
-    border: 3px solid #2c1810;
-    border-radius: 8px;
-    font-family: monospace;
-  }
-  input[type="text"] { text-transform: uppercase; }
-  button {
-    background: #ff9800;
-    color: #2c1810;
-    border: 3px solid #2c1810;
-    padding: 12px 24px;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 8px;
-    cursor: pointer;
-    margin: 5px;
-    transition: transform 0.1s;
-  }
-  button:hover { background: #ffa726; transform: scale(1.05); }
-  button:active { transform: scale(0.98); }
-  button:disabled { background: #ccc; cursor: not-allowed; transform: none; }
-.btn-hint { background: #4caf50; }
-.btn-solution { background: #f44336; color: white; }
-.hints,.solution {
-    background: #fff;
-    border: 2px dashed #2c1810;
-    padding: 15px;
-    margin: 10px 0;
-    border-radius: 8px;
-    display: none;
-  }
-.hints.show,.solution.show { display: block; animation: slideDown 0.3s ease; }
-  @keyframes slideDown {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-.hint-item { margin: 8px 0; padding-left: 20px; }
-.grid {
-    display: grid;
-    grid-template-columns: repeat(3, 80px);
-    gap: 10px;
-    justify-content: center;
-    margin: 15px 0;
-  }
-.grid-cell {
-    width: 80px;
-    height: 80px;
-    border: 3px solid #2c1810;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 40px;
-    background: #fff;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-.grid-cell:hover { background: #ffeb3b; transform: scale(1.1); }
-.code-display {
-    font-family: monospace;
-    background: #2c1810;
-    color: #4fc3f7;
-    padding: 15px;
-    border-radius: 8px;
-    font-size: 20px;
-    margin: 10px 0;
-    letter-spacing: 3px;
-    text-align: center;
-  }
-.morse-letter {
-    display: inline-block;
-    margin: 0 8px;
-    padding: 5px 10px;
-    background: #1a1a1a;
-    border-radius: 4px;
-  }
-.success { color: #4caf50; font-weight: bold; font-size: 18px; }
-.error { color: #f44336; font-weight: bold; }
-.game-over {
-    text-align: center;
-    padding: 40px;
-    background: #f44336;
-    color: white;
-    border-radius: 15px;
-    display: none;
-  }
-.win {
-    text-align: center;
-    padding: 40px;
-    background: #4caf50;
-    color: white;
-    border-radius: 15px;
-    display: none;
-  }
-  a { color: #2196f3; font-weight: bold; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHS Senior Assassin 2026</title>
+    <!-- Favicon - Water Gun Emoji -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔫</text></svg>">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Impact:wght@400;700&family=Poppins:wght@600&display=swap');
+
+        :root {
+            --water-blue: #00b4d8;
+            --sun-yellow: #ffd60a;
+            --light-grey: #bbb;
+            --dark-blue-bg: #005f99;
+            --translucent-blue: rgba(0, 119, 182, 0.75);
+            --header-blue: rgba(0, 119, 182, 0.9);
+            --footer-blue: rgba(0, 55, 90, 0.8);
+            --team-blue-highlight: #0077b6; /* A slightly darker blue for the team box border */
+            --team-bullet-green: #33ff33; /* Green for active players */
+            --team-bullet-red: #ff3333; /* Red for eliminated players */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-blue-bg);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Playful repeating emoji background */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 200%; /* Double the width/height to ensure continuous flow */
+            height: 200%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Ctext x='0' y='25' font-size='2.8rem' opacity='0.7' fill='rgba(255,255,255,1)'%3E%F0%9F%92%A6%3C/text%3E%3Ctext x='50' y='75' font-size='2.8rem' opacity='0.7' fill='rgba(255,255,255,1)'%3E%F0%9F%94%AB%3C/text%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 100px 100px; /* Size of the pattern unit */
+            opacity: 0.12; /* Slightly transparent blue, visible emojis */
+            pointer-events: none;
+            z-index: -1;
+            animation: emojiFlow 30s linear infinite; /* Adjusted animation for continuous flow */
+        }
+
+        @keyframes emojiFlow {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-50%, -50%); } /* Scrolls diagonally to ensure continuous loop */
+        }
+
+        header {
+            text-align: center;
+            padding: 50px 20px 30px;
+        }
+
+        .title {
+            font-family: 'Impact', sans-serif;
+            font-size: clamp(3rem, 10vw, 6rem);
+            font-weight: 400;
+            letter-spacing: -3px;
+            text-shadow: 
+                4px 4px 0 #000,
+                -2px -2px 0 #000,
+                2px -2px 0 #000,
+                -2px 2px 0 #000;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Prize Pool */
+        .prize-container {
+            background: rgba(255,255,255,0.2); /* Keep background slightly transparent */
+            border: 5px solid var(--sun-yellow);
+            border-radius: 25px;
+            padding: 25px 30px;
+            max-width: 420px;
+            margin: 30px auto 15px auto; /* Reduced bottom margin to bring countdown closer */
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        .prize-label {
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
+
+        #prizeAmount {
+            font-family: 'Impact', sans-serif;
+            font-size: 3.8rem;
+            color: var(--sun-yellow);
+            text-shadow: 3px 3px 0 #000;
+        }
+        /* New style for the small text below prize amount */
+        .prize-update-note {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        /* Recent Additions */
+        .recent-additions-container {
+            background: rgba(255,255,255,0.2);
+            border: 5px solid var(--sun-yellow);
+            border-radius: 25px;
+            padding: 15px 20px;
+            max-width: 420px;
+            margin: 15px auto 15px auto; /* Spaced below prize pool, above countdown */
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        .recent-additions-label {
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            color: white;
+        }
+        .recent-additions-list {
+            max-height: calc(3 * 1.5em + 2 * 5px + 2 * 3px); /* Approx height for 3 rows: 3*line-height + 2*margin-bottom + 2*padding-bottom */
+            overflow-y: auto; /* Enable vertical scrolling */
+            padding-right: 10px; /* Space for scrollbar */
+            list-style: none; /* Remove default list styling */
+            padding-left: 0;
+            margin-bottom: 0; /* Remove default ul margin */
+        }
+        .addition-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center; /* Align items vertically */
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            padding-bottom: 3px;
+            border-bottom: 1px dashed rgba(255,255,255,0.2);
+            line-height: 1.5em; /* Ensure consistent row height */
+        }
+        .addition-item:last-of-type {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        .addition-name {
+            flex-grow: 1; /* Allows name to take up available space */
+            text-align: left;
+            margin-right: 10px; /* Space between name and amount */
+            white-space: nowrap; /* Prevent name from wrapping */
+            overflow: hidden; /* Hide overflow for long names */
+            text-overflow: ellipsis; /* Add ellipsis for hidden names */
+        }
+        .addition-amount {
+            color: var(--sun-yellow);
+            font-weight: bold;
+            white-space: nowrap; /* Prevent amount from wrapping */
+        }
+        .recent-additions-note {
+            font-size: 0.75rem;
+            opacity: 0.7;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        /* Registered Teams */
+        .registered-teams-container {
+            background: rgba(255,255,255,0.2);
+            border: 5px solid var(--team-blue-highlight); /* Blue highlight for registered teams */
+            border-radius: 25px;
+            padding: 15px 20px;
+            max-width: 420px;
+            margin: 15px auto 15px auto;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        .registered-teams-label {
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            color: white;
+        }
+        .registered-teams-list {
+            max-height: 250px; /* Fixed height for scrollability */
+            overflow-y: auto;
+            padding-right: 10px;
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 0;
+            text-align: left; /* Align list items to the left */
+        }
+        .team-item {
+            margin-bottom: 10px; /* Space between teams */
+            padding-bottom: 8px; /* Padding for the bottom of each team block */
+            border-bottom: 1px dashed rgba(255,255,255,0.2);
+        }
+        .team-item:last-of-type {
+            border-bottom: none;
+        }
+        .team-name {
+            font-weight: bold;
+            font-size: 1rem;
+            color: white; /* Team name in white */
+            margin-bottom: 5px;
+            text-align: left;
+        }
+        .team-member {
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+            margin-bottom: 3px;
+            text-align: left;
+        }
+        .team-member:last-of-type {
+            margin-bottom: 0;
+        }
+        /* New classes for colored bullets */
+        .bullet-green {
+            background-color: var(--team-bullet-green);
+        }
+        .bullet-red {
+            background-color: var(--team-bullet-red);
+        }
+        .team-bullet { /* Base style for all bullets */
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 8px;
+            flex-shrink: 0; /* Prevent shrinking */
+            display: inline-block; /* Ensure it behaves like a line item */
+            vertical-align: middle; /* Align vertically with text */
+        }
+        .registered-teams-note {
+            font-size: 0.75rem;
+            opacity: 0.7;
+            margin-top: 10px;
+            font-style: italic;
+        }
+        .status-legend-item {
+            display: flex;
+            align-items: center;
+            margin-top: 5px;
+        }
+        .status-legend-item .team-bullet {
+            margin-right: 5px;
+        }
+        .status-update-info {
+            font-size: 0.75rem;
+            opacity: 0.7;
+            margin-top: 10px;
+            font-style: italic;
+            text-align: left;
+        }
+
+        /* Countdown */
+        .countdown-container {
+            background: rgba(255,255,255,0.2); /* Changed to translucent white like prize pool */
+            border: 5px solid red; /* Changed to visible red */
+            border-radius: 25px;
+            padding: 15px 20px; /* Reduced padding for smaller height */
+            max-width: 420px;
+            margin: 15px auto 15px auto; /* Keep it spaced from prize pool and next section */
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        .countdown-label {
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 5px;
+            color: white; /* Changed to white */
+        }
+
+        #countdownTimer {
+            font-family: 'Impact', sans-serif;
+            font-size: 2.2rem; /* Smaller font size for countdown */
+            color: red; /* Kept red */
+            text-shadow: 2px 2px 0 #000;
+        }
+
+        .countdown-note {
+            font-size: 1rem; /* Bigger font size */
+            opacity: 1; /* Fully opaque */
+            margin-top: 5px;
+            font-style: normal; /* Normal style */
+            font-weight: bold; /* Bold text */
+            color: red; /* Red color */
+            display: block; /* Ensures it takes its own line and can be centered */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5); /* Add text shadow for emphasis */
+        }
+        
+        /* Players Remaining */
+        
+                /* Players Remaining */
+        .players-remaining-container {
+            background: rgba(255,255,255,0.2);
+            border: 5px solid #33ff33; /* Green accent */
+            border-radius: 25px;
+            padding: 15px 20px;
+            max-width: 420px;
+            margin: 15px auto 15px auto;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        .players-remaining-label {
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 5px;
+            color: white;
+        }
+
+        #playersRemaining {
+            font-family: 'Impact', sans-serif;
+            font-size: 3.2rem;
+            color: #33ff33;
+            text-shadow: 3px 3px 0 #000;
+            display: block;
+        }
+
+        .players-note {
+            font-size: 1rem;
+            opacity: 1;
+            margin-top: 5px;
+            font-weight: bold;
+            color: #33ff33;
+        }
+        
+        /* Recent Eliminations */
+        
+                /* Recent Eliminations */
+        .recent-eliminations-container {
+            background: rgba(255,255,255,0.2);
+            border: 5px solid var(--team-bullet-red);
+            border-radius: 25px;
+            padding: 15px 20px;
+            margin-top: 12px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        .recent-eliminations-label {
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .recent-eliminations-list {
+            max-height: 180px;
+            overflow-y: auto;
+            padding-right: 10px;
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 0;
+            text-align: left;
+        }
+
+        .elimination-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+            padding-bottom: 4px;
+            border-bottom: 1px dashed rgba(255,255,255,0.2);
+        }
+
+        .elimination-item:last-of-type {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .elimination-name {
+            flex-grow: 1;
+            text-align: left;
+            color: #ff6666;
+        }
+
+        .elimination-time {
+            color: var(--light-grey);
+            font-size: 0.8rem;
+            white-space: nowrap;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--header-blue);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 16px 0;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-family: 'Impact', sans-serif;
+            font-size: 1.35rem;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--sun-yellow);
+            text-shadow: 0 0 10px #ffd60a;
+        }
+
+        /* Sections */
+        section {
+            padding: 70px 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-family: 'Impact', sans-serif;
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 40px;
+            text-shadow: 3px 3px 0 #000;
+        }
+
+        /* Announcement Card Styling */
+        .announcement-card {
+            background-color: var(--translucent-blue);
+            border-radius: 25px;
+            margin-bottom: 30px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            max-width: 600px; /* Constrain width for tweet-like appearance */
+            margin-left: auto;
+            margin-right: auto;
+            text-align: left; /* Align tweet content left */
+        }
+
+        .tweet-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .tweet-pfp {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            margin-right: 12px;
+            border: 2px solid white; /* Small border for pop */
+        }
+
+        .tweet-info {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: white;
+        }
+
+        .verified-badge {
+            width: 18px;
+            height: 18px;
+            margin-left: 8px;
+            fill: var(--water-blue); /* Blue for verified check */
+            vertical-align: middle;
+        }
+
+        .admin-tag {
+            background-color: rgba(255,255,255,0.2);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-size: 0.75rem;
+            font-weight: normal;
+            margin-left: 8px;
+            line-height: 1; /* Adjust line height to prevent extra space */
+            vertical-align: middle;
+        }
+
+        .tweet-content {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .tweet-content p {
+            margin-bottom: 10px; /* Space between paragraphs in the tweet */
+        }
+
+        /* New style for timestamp */
+        .timestamp {
+            font-size: 0.8rem;
+            color: var(--light-grey); /* Light grey */
+            text-align: center;
+            margin-top: 20px; /* Space above timestamp */
+            opacity: 0.8;
+            display: block; /* Ensures it takes its own line and can be centered */
+        }
+
+        /* Generic placeholder for rules/signup */
+        .section-placeholder {
+            padding: 40px;
+            text-align: center;
+            font-size: 1.25rem;
+            background: rgba(0,0,0,0.25);
+            border-radius: 18px;
+        }
+
+        /* Rules Section Styling - Accordion */
+        #rules {
+            background-color: var(--translucent-blue);
+            border-radius: 25px;
+            margin-bottom: 30px;
+            padding: 40px 20px; /* Adjusted padding */
+            max-width: 800px; /* Constrain width for readability */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .rule-item {
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .rule-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            background-color: rgba(255,255,255,0.15);
+            transition: background-color 0.2s ease;
+        }
+
+        .rule-header:hover {
+            background-color: rgba(255,255,255,0.25);
+        }
+
+        .rule-header span.number {
+            color: var(--sun-yellow);
+            margin-right: 10px;
+            font-size: 1.3rem;
+        }
+
+        .rule-header span.title-text {
+            flex-grow: 1;
+            text-align: left;
+        }
+
+        .rule-header .toggle-icon {
+            font-size: 1.8rem;
+            line-height: 1;
+            transition: transform 0.2s ease;
+            color: var(--sun-yellow);
+        }
+
+        .rule-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            padding: 0 20px; /* Apply horizontal padding */
+            text-align: left;
+        }
+
+        .rule-item.active .rule-content {
+            max-height: 2000px; /* Increased max-height to adapt to more content */
+            padding-bottom: 15px; /* Add bottom padding when expanded */
+            transition: max-height 0.4s ease-in;
+        }
+        
+        .rule-item.active .rule-header .toggle-icon {
+            transform: rotate(45deg);
+        }
+
+        .rule-content ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            padding-top: 10px;
+        }
+
+        .rule-content ol {
+            list-style-type: decimal;
+            margin-left: 20px;
+            padding-top: 10px;
+        }
+
+        .rule-content p {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .rule-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .rule-content ul li, .rule-content ol li {
+            margin-bottom: 5px;
+        }
+
+        .rule-content .important-note {
+            color: var(--sun-yellow);
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
+        .rule-content img { /* Style for images within rule content */
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 15px auto; /* Centered image */
+            display: block; /* Ensures it takes its own line */
+        }
+
+        /* Signup Form Section */
+        #signup {
+            background-color: var(--translucent-blue);
+            border-radius: 25px;
+            margin-bottom: 30px; /* Add some space between sections */
+        }
+
+        /* Instagram Embed Section */
+        #feed {
+            background-color: var(--translucent-blue);
+            border-radius: 25px;
+            padding: 30px 20px;
+        }
+
+        .instagram-embed {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        .instagram-embed iframe {
+            width: 100%;
+            height: 620px;
+            border: none;
+            border-radius: 20px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 50px 20px 30px;
+            background: var(--footer-blue);
+            font-size: 1rem;
+        }
+
+        /* New style for the extra small copyright text */
+        .copyright-text {
+            font-size: 0.7rem; /* Even smaller font size */
+            opacity: 0.6; /* More subtle opacity */
+            margin-top: 15px; /* A bit more space from the line above */
+        }
+
+        /* Responsive iframe for Google Form */
+        #signup iframe {
+            max-width: 100%; /* Ensure it doesn't overflow */
+            width: 100%; /* Make it take full width of its container */
+            height: 2581px; /* Keep original height for content */
+            border: none;
+        }
+
+        @media (max-width: 768px) {
+            .instagram-embed iframe {
+                height: 520px;
+            }
+            nav ul {
+                gap: 20px;
+            }
+            .title {
+                font-size: 3.2rem;
+            }
+            #rules {
+                padding: 20px 10px;
+            }
+            .rule-header, .rule-content {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-  <div class="header">
-    <svg class="pyramid-svg" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
-      <polygon points="100,5 20,55 180,55" fill="#d4a574" stroke="#8b4513" stroke-width="2"/>
-      <polygon points="100,5 60,55 140,55" fill="#cd853f" stroke="#8b4513" stroke-width="2"/>
-      <text x="100" y="45" text-anchor="middle" font-size="20">🏺</text>
-    </svg>
-    <h1>🧽 SpongeBob in Egypt: Logic Escape v3 🏜️</h1>
-    <p>SpongeBob is drying out! Solve 5 puzzles to get back to Bikini Bottom</p>
-    <div class="water-meter">
-      <div class="water-fill" id="waterFill">100% 💧</div>
-    </div>
-    <p><a href="/mnt/data/CodeSheet-201912.pdf_-_CodeSheet.pdf" target="_blank">📄 View Code Sheet</a></p>
-  </div>
 
-  <!-- Puzzle 1: UPDATED - Answer is SPONGEBOB -->
-  <div class="puzzle active" id="puzzle1">
-    <h2>Puzzle 1: Hieroglyph Cipher 🗿</h2>
-    <div class="story">SpongeBob found a wall of numbers in the pyramid. The ghost of King Crab says "Decode my name to proceed!"</div>
-    <p><strong>Decode:</strong></p>
-    <div class="code-display">19 - 16 - 15 - 14 - 7 - 5 - 2 - 15 - 2</div>
-    <p>Use A=1...Z=26. Type the word you decoded.</p>
-    <div class="input-group">
-      <input type="text" id="ans1" placeholder="Enter the word">
-    </div>
-    <button onclick="checkAnswer(1, 'SPONGEBOB')">Check Answer</button>
-    <button class="btn-hint" onclick="showHints(1)">Show Hints</button>
-    <button class="btn-solution" onclick="showSolution(1)">Show Solution</button>
-    <div class="hints" id="hints1">
-      <div class="hint-item">💡 Hint 1: 19=S, 16=P, 15=O, 14=N...</div>
-      <div class="hint-item">💡 Hint 2: Keep going: 7=G, 5=E, 2=B, 15=O, 2=B</div>
-      <div class="hint-item">💡 Hint 3: The word is SPONGEBOB</div>
-    </div>
-    <div class="solution" id="solution1">
-      <strong>Solution:</strong> 19=S, 16=P, 15=O, 14=N, 7=G, 5=E, 2=B, 15=O, 2=B → <strong>SPONGEBOB</strong>
-    </div>
-    <div id="result1"></div>
-  </div>
+    <header>
+        <h1 class="title">CHS SENIOR ASSASSIN</h1>
+        <p class="subtitle">CLASS OF 2026 • COCHRANE HIGH SCHOOL 💦🔫</p>
+        
+        <div class="prize-container">
+            <div class="prize-label">TOTAL PRIZE POOL 🏆</div>
+            <div id="prizeAmount">$2600</div>
+            <p class="prize-update-note">All cash is in! Prize pool amount is now final.</p>
+        </div>
+        <div class="recent-additions-container">
+            <div class="recent-additions-label">RECENT ADDITIONS</div>
+            <ul class="recent-additions-list">
+                <li class="addition-item">
+                    <span class="addition-name">Gemma Kosheluk - Paid Revive</span>
+                    <span class="addition-amount">+$50</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Rhett Price - Paid Revive</span>
+                    <span class="addition-amount">+$50</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Noah White - Paid Revive</span>
+                    <span class="addition-amount">+$50</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Tsuyoshi MacKay - Paid Revive</span>
+                    <span class="addition-amount">+$50</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Rylee Bashow - Paid Revive</span>
+                    <span class="addition-amount">+$50</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Olivia Thompson - Paid Revive</span>
+                    <span class="addition-amount">+$50</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Corbin Reid - Paid Revive</span>
+                    <span class="addition-amount">+$50</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Calleigh Mclane - Paid Revive</span>
+                    <span class="addition-amount">+$50</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Jaxon Shapkin - Paid Revive</span>
+                    <span class="addition-amount">+$50</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Singh Praseutsith - Paid Revive</span>
+                    <span class="addition-amount">+$50</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Liv Simpson - Paid Revive</span>
+                    <span class="addition-amount">+$50</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Nate Maclure - Paid Revive</span>
+                    <span class="addition-amount">+$50</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Spenser Derksen - Paid Revive</span>
+                    <span class="addition-amount">+$50</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Anthony Drivet Legault - Paid Revive</span>
+                    <span class="addition-amount">+$50</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Carter Walsh - Paid Revive</span>
+                    <span class="addition-amount">+$50</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Carston Swan - Paid Revive</span>
+                    <span class="addition-amount">+$50</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Andy Kefford - Paid Revive</span>
+                    <span class="addition-amount">+$50</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Ronin Lefebvre - Paid Revive</span>
+                    <span class="addition-amount">+$50</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Saylor Muehlenberg - Paid Revive</span>
+                    <span class="addition-amount">+$50</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Mylo Kivenko - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Jesse Dingha - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Ty Porter - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Brennen Banford - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Chase Walker - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Carter McKay - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Lucas Todd - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Tsuyoshi Mackay - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Ronan Neutens - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Mason Fischer-Lynn - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Keela Kerr - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Megan Petty - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Aria Spanbauer - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Carter Walsh - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Anthony Omoifo - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Raimo Sollitt - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Julien Fournier - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Matty Speers - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Kayley Torrie - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Sawyer Rideout - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Simon Witt - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Andrii Pohorielov - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Leonne Aguilar - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">David Wheller - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Liam Deagle - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Candice Espallardo - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Oliver Johnson - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Chloe Reid - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Georgina Espanioli - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Toni Akande - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Eliana Adedeji - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Emily Broatch - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Dayton Simpson - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Taylor Bilben - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Jackson Hughes - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Amelia Schmitt - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Avayah Bidlake - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Logan Penston - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Ethan Rost - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Olivia Linklater - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Grayson Ransom - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Katelyn Bridge - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Kira Giesbrecht - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Avree Colling - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Gemma Kosheluk - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Marlo Kravets - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Corbin Reid - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Payton Zack - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Bronwynn Lutchman - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Brock Van de Kraats - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Avneesh Shukla - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Jackson Priddey - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Dusty Fluker - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Bruce Macpherson - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Irdam Ahmed - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Lucas Perrier - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Quinn Sargent - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Gabriel Brisebois - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Zachary Cristea - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Aran Khanna - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Spenser Derksen - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Sakib Sheikh - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Barrett Wennekamp - Entry Fee</span>
+                    <span class="addition-amount">+$20</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Eli Torrie - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Evan Lawrence - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Piper Halliday - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Kaiden Wilson - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Kaidan Barber - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Rhett Price - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Porter Pighin - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Ellie Allison - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Ethan Wytrychowski - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Grant Willmott - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Frances Wood - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Mia MacDonald - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Sophie Pomares - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Ellis Brassard - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Maddax Pearson - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Addison Wasylik - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Olivia Wasylik - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Ashlyn Rost - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Hannah Dick - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">AJ Laurell - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Kaleb Benmore - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Liv Simpson - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Millie Bell - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Jacob Kueber - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Paige Kalin - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Carly Abougoush - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Hannah Deitz - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Quinn Derricott - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Gemma Caddel - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Logan O'Dell - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Jaxon Shapkin - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Jarvis Raposo - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Camryn Perez - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Kalyssa Korol-Greene - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">George Sheldon - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Desmond Williams - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Sienna Brasser - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Eli Fitzsimmons - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Maysa Nicoll - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Jayden Vandenberg - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Calleigh Mclane - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Saylor Muehlenberg - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Anna Pace - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Jake Helmerson - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Jeah Heller - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Caebri Smith - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Sophia Gillespie - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Carson Carroll - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Miley Doell - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Olivia Hutchison - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Unel Van Heerden - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Nina Livingstone - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Willow Kabanuk - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Izaac Hooper - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Georgia Polhill - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Livi Poulin - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Indiana Carlyle-Byford - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Emma MacKinnon - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Noah White - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Matthew Loewen - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Jorjia Cumberland - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Jane Litchfield - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Hunter Sawatsky - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Avery Lange - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Tyler Clazie - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Xander Manolakas - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Olivia Thompson - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Rylee Bashow - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Sofia Zwaagstra - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Vivian Letourneau - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Garrett Rogers - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Carter Murphy - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Becca Neutens - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Tanner Edmunds - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Andy Kefford - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Anthony Drivet Legault - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Emma Gauthier - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Hudson Huybrecht - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Julia Sawyshyn - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Carston Swan - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Sawyer Link - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Aedan Carnegie - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Elle Johnston - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Kaden Byrne - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Nick Walsh - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Punita Promcharoenwatana - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Danika Lyttle - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Ellie Swan - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Ronin Lefebvre - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Dax Thom - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Broden Duncan - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Elliot Kirk - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Logan Morton - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Jack Wolbaum - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Haydhen Murray - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Rachel Kinch - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Jordana White - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Singh Praseutsith - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Nate Maclure - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+                <li class="addition-item">
+                    <span class="addition-name">Henry Fransoo - Entry Fee</span>
+                    <span class="addition-amount">+$10</span>
+                </li>
+            </ul>
+            <p class="recent-additions-note">[This section will show the latest contributions to the prize pool (ex: entry fees, paid revives, etc.).]</p>
+        </div>
+        
+        <div class="players-remaining-container">
+            <div class="players-remaining-label">PLAYERS REMAINING 👥</div>
+            <span id="playersRemaining">31/164</span>
+            <p class="players-note">Game is LIVE</p>
+        </div>
 
-  <!-- Puzzle 2: UPDATED - Answer is 29119149 -->
-  <div class="puzzle" id="puzzle2">
-    <h2>Puzzle 2: Sarcophagus NATO Lock ⚔️</h2>
-    <div class="story">The sarcophagus only opens with a military call sign. A mummy whispers the full code...</div>
-    <p><strong>Decode:</strong></p>
-    <div class="code-display">BRAVO - INDIA - KILO - INDIA - NOVEMBER - INDIA</div>
-    <p>Take first letter of each, convert to numbers A=1...Z=26, enter all digits together.</p>
-    <div class="input-group">
-      <input type="number" id="ans2" placeholder="Enter full number code">
-    </div>
-    <button onclick="checkAnswer(2, 29119149)">Check Answer</button>
-    <button class="btn-hint" onclick="showHints(2)">Show Hints</button>
-    <button class="btn-solution" onclick="showSolution(2)">Show Solution</button>
-    <div class="hints" id="hints2">
-      <div class="hint-item">💡 Hint 1: B-I-K-I-N-I spells BIKINI</div>
-      <div class="hint-item">💡 Hint 2: B=2, I=9, K=11, I=9, N=14, I=9</div>
-      <div class="hint-item">💡 Hint 3: Put them together: 2-9-11-9-14-9 = 29119149</div>
-    </div>
-    <div class="solution" id="solution2">
-      <strong>Solution:</strong> BRAVO=B=2, INDIA=I=9, KILO=K=11, INDIA=I=9, NOVEMBER=N=14, INDIA=I=9 → <strong>29119149</strong>
-    </div>
-    <div id="result2"></div>
-  </div>
+        <div class="registered-teams-container">
+            <div class="registered-teams-label">TEAMS/PLAYERS LIST</div>
+            <ul class="registered-teams-list">
+                <li class="team-item">
+                    <div class="team-name">Always Wet</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Avneesh Shukla</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Jackson Priddey</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Aquaholics</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Maysa Nicoll</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Jayden Vandenberg</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Big fe squirters</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Ty Porter</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Brennen Banford</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Blonde Blasters</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Avery Lange</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Jeah Heller</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Bubble blasters</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Anthony Omofio</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Megan Petty</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Bubble Guppies</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Hannah Deitz</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Carly Abougoush</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Burst Control</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Ellie Swan</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Danika Lyttle</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Can't even evaporate</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Unel Van Heerden</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Irdam Ahmed</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Discharge Demons</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Rhett Price</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Porter Pighin</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">DOUBLE A</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Amelia Schmitt</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Avayah Bidlake</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Double J Drip</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Jorjia Cumberland</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Jane Litchfield</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Dryhump demons</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Bruce Macpherson</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Dusty Fluker</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Elimination Nation</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Henry Fransoo</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Nate Maclure</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Flow State</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Kira Giesbrecht</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Katelyn Bridge</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Glasnost and Perestroika</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Kayley Torrie</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Matty Speers</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Grave Diggers</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Singh Praseutsith</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Ronin Lefebvre</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Gǔns N' Hǒses</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Gabriel Brisebois</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Quinn Sargent</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">H2hoes</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Rylee Bashow</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Olivia Thompson</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">H2OH-NO!</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Nina Livingstone</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Sienna Brasser</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Her Wet Box</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Dayton Simpson</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Carter McKay</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Hose</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Kalyssa Korol-Greene</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Camryn Perez</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">I sneezed my pants</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Anthony Drivet Legault</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Andy Kefford</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Jehovah's wetness</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Sophia Gillespie</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Caebri Smith</div> <!-- Placeholder -->
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Jimmy Wettron and the Gypsy Squirter</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Zack Cristea</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Aran Khanna</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">karsplashians</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Liv Simpson</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Paige Kalin</div> <!-- Placeholder -->
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Khaleel Sheikh</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Elliot Kirk</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Sakib Sheikh</div> <!-- Placeholder -->
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Liquid Legends</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Saylor Muehlenberg</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Calleigh Mclane</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Look out for Fergus</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Aedan Carnegie</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Sawyer Link</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Mac and Wheeze</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Noah White</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Emma MacKinnon</div> <!-- Placeholder -->
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Mission splashable</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Kaiden Wilson</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Piper Halliday</div> <!-- Placeholder -->
+                </li>
+                <li class="team-item">
+                    <div class="team-name">One pump wonder</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Simon Witt</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Sawyer Rideout</div> <!-- Placeholder -->
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Piddle-files</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Sophie Pomares</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Maddax Pearson</div> <!-- Placeholder -->
+                </li>
+                <li class="team-item">
+                    <div class="team-name">rice water</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Raimo Sollitt</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Tsuyoshi Mackay</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Sakib</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Nick Walsh</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Kaden Byrne</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Senior Sirens</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Vivian Letourneau</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Sofia Zwaagstra</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Shrimpizzle</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Oliver Johnson</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Silent but Deadly</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Haydhen Murray</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Rachel Kinch</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Skinny wet cripples</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Jaxon Shapkin</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Logan O'Dell</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Slip n Stroopwaffles</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Gemma Caddel</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Quinn Derricott</div> <!-- Placeholder -->
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Slippery When Wet</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Aria Spanbauer</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Keela Kerr</div> <!-- Placeholder -->
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Soaked and Dangerous</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Elle Johnston</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Becca Neutens</div> <!-- Placeholder -->
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Soaked & Stuffed</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Broden Duncan</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Dax Thom</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Soaked in Dominance</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Leonne Aguilar</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Andrii Pohorielov</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Splash pack</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Georgia Polhill</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Willow Kabanuk</div> <!-- Placeholder -->
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Splash Squared</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Olivia Wasylik</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Addison Wasylik</div> <!-- Placeholder -->
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Spray's anatomy</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Hannah Dick</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Ashlyn Rost</div> <!-- Placeholder -->
+                </li>
+                <li class="team-item">
+                    <div class="team-name">sprayoncé</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Mia MacDonald</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Frances Wood</div> <!-- Placeholder -->
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Squirt and destroy</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Eli Fitzsimmons</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>David Wheller</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Squirt gang</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Julien Fournier</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Mylo Kivenko</div>
+                </
+                <li class="team-item">
+                    <div class="team-name">Squirt Meister's</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Matthew Loewen</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Izaac Hooper</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Squirt Squad</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Julia Sawyshyn</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Hudson Huybrecht</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Squirt Squad</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Payton Zack</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Bronwynn Lutchman</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Squirting Steven</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Hunter Sawatsky</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Carson Carroll</div> <!-- Placeholder -->
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Squirtles</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Eliana Adedeji</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Toni Akande</div> <!-- Placeholder -->
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Super squirters</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Logan Penston</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Corbin Reid</div> <!-- Placeholder -->
+                </li>
+                <li class="team-item">
+                    <div class="team-name">The Backdoor Bandits</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Desmond Williams</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>George Sheldon</div> <!-- Placeholder -->
+                </li>
+                <li class="team-item">
+                    <div class="team-name">🫰The beans🫰</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Olivia Hutchison</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Miley Doell</div> <!-- Placeholder -->
+                </li>
+                <li class="team-item">
+                    <div class="team-name">The Damp Dynasty</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Spenser Derksen</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Lucas Perrier</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">The dirty girls</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Xander Manolakas</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>AJ Laurell</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">The Easy Targets</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Brock Van de Kraats</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Jackson Hughes</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">The Finger Blasters</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Carston Swan</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Tanner Edmunds</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">The Off-Sprays</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Olivia Linklater</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Ethan Rost</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">The Wet Dream Team</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Carter Murphy</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Garrett Rogers</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Too wet to handle</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Jarvis Raposo</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Chase Walker</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Tuggin' the garden hoes</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Georgina Espanioli</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Chloe Reid</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Tung</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Jesse Dingha</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Colton Hambrook</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Water you doing?</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Candice Espallardo</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Liam Deagle</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Waterboard Warriors</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Grayson Ransom</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Wet Babies</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Emily Broatch</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Marlo Kravets</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Wet Bandits</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Jack Wolbaum</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Logan Morton</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Wet Blankets</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Carter Walsh</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Ronan Neutens</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Wet chicks</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Emma Gauthier</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Punita Promcharoenwatana</div> <!-- Placeholder -->
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Wet discharge</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Mason Fischer-Lynn</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Lucas Todd</div> <!-- Placeholder -->
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Wet dreamers</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Ethan Wytrychowski</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Evan Lawrence</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Wet egg</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Eli Torrie</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Barrett Wennekamp</div> <!-- Placeholder -->
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Wet intentions</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Tyler Clazie</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Kaleb Benmore</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Wet water</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Ethan Wytrychowski</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Evan Lawrence</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Wet'n Wild</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Jacob Kueber</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Millie Bell</div> <!-- Placeholder -->
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Wet Willys</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Ellis Brassard</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Grant Willmott</div> <!-- Placeholder -->
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Wet Wipes</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Jake Helmerson</div>
+                    <div class="team-member"><span class="team-bullet bullet-green"></span>Anna Pace</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">When there's fire there's wet</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Kaidan Barber</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Taylor Bilben</div>
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Young Ho's</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Jordana White</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Ellie Allison</div> <!-- Placeholder -->
+                </li>
+                <li class="team-item">
+                    <div class="team-name">Z-BROS</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Indiana Carlyle-Byford</div>
+                    <div class="team-member"><span class="team-bullet bullet-red"></span>Livi Poulin</div> <!-- Placeholder -->
+                </li>
+            </ul>
+                        <div class="status-legend-item"><span class="team-bullet bullet-green"></span> Green bullet = In Game</div>
+            <div class="status-legend-item" style="margin-bottom: 8px;"><span class="team-bullet bullet-red"></span> Red bullet = Eliminated</div>
 
-  <!-- Puzzle 3: UPDATED - Spaced out Morse, Answer is SEA WATER -->
-  <div class="puzzle" id="puzzle3">
-    <h2>Puzzle 3: Tomb Tap Code 📡</h2>
-    <div class="story">Ancient drums tap out a message. SpongeBob desperately needs this!</div>
-    <p><strong>Decode Morse - each letter spaced out:</strong></p>
-    <div class="code-display">
-      <span class="morse-letter">...</span>
-      <span class="morse-letter">.</span>
-      <span class="morse-letter">.-</span>
-      <span style="margin: 0 15px; background: #444;">/</span>
-      <span class="morse-letter">.--</span>
-      <span class="morse-letter">.-</span>
-      <span class="morse-letter">-</span>
-      <span class="morse-letter">.</span>
-      <span class="morse-letter">.-.</span>
-    </div>
-    <p>Type the two words with a space between them.</p>
-    <div class="input-group">
-      <input type="text" id="ans3" placeholder="Enter the phrase">
-    </div>
-    <button onclick="checkAnswer(3, 'SEA WATER')">Check Answer</button>
-    <button class="btn-hint" onclick="showHints(3)">Show Hints</button>
-    <button class="btn-solution" onclick="showSolution(3)">Show Solution</button>
-    <div class="hints" id="hints3">
-      <div class="hint-item">💡 Hint 1:... = S,. = E,.- = A → First word is SEA</div>
-      <div class="hint-item">💡 Hint 2:.-- = W,.- = A, - = T,. = E,.-. = R → Second word is WATER</div>
-      <div class="hint-item">💡 Hint 3: Answer is SEA WATER</div>
-    </div>
-    <div class="solution" id="solution3">
-      <strong>Solution:</strong>... = S,. = E,.- = A → SEA |.-- = W,.- = A, - = T,. = E,.-. = R → WATER → <strong>SEA WATER</strong>
-    </div>
-    <div id="result3"></div>
-  </div>
+    </header>
 
-  <!-- Puzzle 4: UPDATED - Answer is 2 for jellyfish -->
-  <div class="puzzle" id="puzzle4">
-    <h2>Puzzle 4: Anubis Pattern Lock 🪼</h2>
-    <div class="story">Each row/column needs one of each: 🦀 crab=1, 🪼 jellyfish=2, 🍴 spatula=3. Find the missing piece!</div>
-    <div class="grid" id="patternGrid">
-      <div class="grid-cell">🦀</div><div class="grid-cell">🪼</div><div class="grid-cell">🍴</div>
-      <div class="grid-cell">🪼</div><div class="grid-cell">🍴</div><div class="grid-cell">🦀</div>
-      <div class="grid-cell">🍴</div><div class="grid-cell">🦀</div><div class="grid-cell">?</div>
-    </div>
-    <p>What goes in the? spot? Enter: 1 for 🦀, 2 for 🪼, 3 for 🍴</p>
-    <div class="input-group">
-      <input type="number" id="ans4" placeholder="Enter number (1, 2, or 3)" min="1" max="3">
-    </div>
-    <button onclick="checkAnswer(4, 2)">Check Answer</button>
-    <button class="btn-hint" onclick="showHints(4)">Show Hints</button>
-    <button class="btn-solution" onclick="showSolution(4)">Show Solution</button>
-    <div class="hints" id="hints4">
-      <div class="hint-item">💡 Hint 1: Row 3 has 🦀 and 🍴, so it needs 🪼</div>
-      <div class="hint-item">💡 Hint 2: Column 3 has 🍴 and 🦀, so it also needs 🪼</div>
-      <div class="hint-item">💡 Hint 3: 🪼 jellyfish = 2</div>
-    </div>
-    <div class="solution" id="solution4">
-      <strong>Solution:</strong> Row 3 and Column 3 both need 🪼 → <strong>2</strong>
-    </div>
-    <div id="result4"></div>
-  </div>
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#announcements">Announcements</a></li>
+            <li><a href="#rules">Rules</a></li>
+            <li><a href="#feed">IG Feed</a></li>
+            <!-- Removed the "Follow IG" link -->
+        </ul>
+    </nav>
 
-  <!-- Puzzle 5: NEW - Word puzzle using first letters -->
-  <div class="puzzle" id="puzzle5">
-    <h2>Puzzle 5: Pharaoh's Word Lock 👑</h2>
-    <div class="story">The final door needs a 4-letter word. Use the FIRST LETTER of each previous answer!</div>
-    <p><strong>Riddle:</strong> Take the first letter from Puzzle 1, 2, 3, and 4. Unscramble them to spell a word meaning "the person in charge".</p>
-    <div class="code-display" id="codeSummary">Letters: S + B + S + J =?</div>
-    <div class="input-group">
-      <input type="text" id="ans5" placeholder="Enter 4-letter word">
-    </div>
-    <button onclick="checkAnswer(5, 'BOSS')">Check Answer</button>
-    <button class="btn-hint" onclick="showHints(5)">Show Hints</button>
-    <button class="btn-solution" onclick="showSolution(5)">Show Solution</button>
-    <div class="hints" id="hints5">
-      <div class="hint-item">💡 Hint 1: S from SPONGEBOB, B from BIKINI, S from SEA, J from JELLYFISH</div>
-      <div class="hint-item">💡 Hint 2: You have S, B, S, J. Rearrange them.</div>
-      <div class="hint-item">💡 Hint 3: The boss of the Krusty Krab is... BOSS</div>
-    </div>
-    <div class="solution" id="solution5">
-      <strong>Solution:</strong> S + B + S + J unscrambles to <strong>BOSS</strong>
-    </div>
-    <div id="result5"></div>
-  </div>
+    <section id="announcements">
+        <h2>ANNOUNCEMENTS</h2>
+        <div class="announcement-card">
+            <div class="tweet-header">
+                <!-- IMPORTANT: Using the RAW content URL now for direct embedding -->
+                <img src="https://raw.githubusercontent.com/codelyoon/fransoo.com-chs/main/582086772_17951647944060497_9221629917420091973_n.jpg" alt="Henry Fransoo" class="tweet-pfp">
+                <div class="tweet-info">
+                    Henry Fransoo
+                    <svg class="verified-badge" viewBox="0 0 24 24" aria-label="Verified account">
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                    </svg>
+                    <span class="admin-tag">Admin</span>
+                </div>
+            </div>
+            <div class="tweet-content">
+                <p>The game has officially started!</p>
+                <p>Thank you to everyone who signed up for making this game possible!</p>
+                <p>Please make sure you have fully reviewed all the rules as some things have changed since they were first released."
+                <p>Stay safe and have fun! If you have any questions or concerns please reach out!</p>
+            </div>
+            <span class="timestamp">Posted: May 4, 12:00AM</span>
+        </div>
+    </section>
 
-  <div class="game-over" id="gameOver">
-    <h2>💀 DRIED OUT! 💀</h2>
-    <p>SpongeBob ran out of water...</p>
-    <button onclick="location.reload()">Try Again</button>
-  </div>
+    <section id="rules">
+        <h2>GAME RULES</h2>
+        
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">1.</span>
+                <span class="title-text">🎯 Objective</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <p>This is a Battle Royale (Duos) format.</p>
+                <p>You will play in teams of 2 — eliminate other teams and be the last team standing.</p>
+                <p>To move on to the next round, your team must eliminate at least one person. eliminate both, you move on AND you are safe from the next purge.</p>
+            </div>
+        </div>
 
-  <div class="win" id="winScreen">
-    <h2>🎉 YOU ESCAPED! 🎉</h2>
-    <p>SpongeBob made it back to Bikini Bottom!</p>
-    <p>Final Word: BOSS</p>
-    <button onclick="location.reload()">Play Again</button>
-  </div>
-</div>
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">2.</span>
+                <span class="title-text">💰 Entry Fee</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <p>Info regarding entry payments can be found on the sign-up section of this website. The $10 payment is mandatory and you cannot play unless it is paid. All these payments collected from players will be allocated towards the prize pool, which will be split amongst the winning duo.</p>
+            </div>
+        </div>
 
-<script>
-let water = 100;
-let currentPuzzle = 1;
-let answers = {1: null, 2: null, 3: null, 4: null, 5: null};
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">3.</span>
+                <span class="title-text">👥 Teams</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <ul>
+                    <li>Players must register in teams of 2 (or solo if they wish)</li>
+                    <li>Each team must:
+                        <ul>
+                            <li>Create a team name</li>
+                            <li>Upload a team photo in the app</li>
+                        </ul>
+                    </li>
+                    <li>Both teammates are active players</li>
+                </ul>
+            </div>
+        </div>
 
-function updateWater(amount) {
-  water += amount;
-  if (water < 0) water = 0;
-  if (water > 100) water = 100;
-  document.getElementById('waterFill').style.width = water + '%';
-  document.getElementById('waterFill').textContent = water + '% 💧';
-  if (water === 0) {
-    document.querySelectorAll('.puzzle').forEach(p => p.style.display = 'none');
-    document.getElementById('gameOver').style.display = 'block';
-  }
-}
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">4.</span>
+                <span class="title-text">💀 Eliminations (Duos Rules)</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <ul>
+                    <li>If one teammate is eliminated, they are out</li>
+                    <li>The other teammate continues solo</li>
+                    <li>A team is fully eliminated when both players are out</li>
+                    <li>When your team eliminates a target, this means your team can advance to the next round. However, it does not mean that you are immune for the rest of the week; your assassins are still able to eliminate you.</li>
+                </ul>
+            </div>
+        </div>
 
-function checkAnswer(puzzleNum, correct) {
-  const input = document.getElementById('ans' + puzzleNum);
-  const result = document.getElementById('result' + puzzleNum);
-  let userAns = input.value.trim().toUpperCase();
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">5.</span>
+                <span class="title-text">🔫 Approved Weapons</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <ul>
+                    <li>Water balloons</li>
+                    <li>Water containers/buckets</li>
+                    <li>Brightly colored water guns only</li>
+                </ul>
+                <p class="important-note">❗ Water guns must be clearly toy-like (no realistic-looking replicas)</p>
+                <p class="important-note">❗ No other items are allowed</p>
+                <p class="important-note">❗ Gel blasters and similar items are NOT allowed due to high impact</p>
+            </div>
+        </div>
 
-  if (puzzleNum === 1 || puzzleNum === 3 || puzzleNum === 5) {
-    if (userAns === correct) {
-      result.innerHTML = '<p class="success">✅ Correct! Moving to next puzzle...</p>';
-      answers[puzzleNum] = correct;
-      input.disabled = true;
-      updateCodeSummary();
-      setTimeout(() => {
-        if (puzzleNum < 5) {
-          document.getElementById('puzzle' + puzzleNum).classList.remove('active');
-          document.getElementById('puzzle' + (puzzleNum + 1)).classList.add('active');
-          currentPuzzle = puzzleNum + 1;
-        } else {
-          document.querySelectorAll('.puzzle').forEach(p => p.style.display = 'none');
-          document.getElementById('winScreen').style.display = 'block';
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">6.</span>
+                <span class="title-text">🚫 School Safe Zone</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <img src="https://raw.githubusercontent.com/codelyoon/fransoo.com-chs/main/IMG_7798.png" alt="Map showing safe zones and boundaries" />
+                <p><strong>School Grounds (Red Zone):</b></p>
+                <ul>
+                    <li>Everything inside the red boundary lines shown in the map/photo is a safe zone (no eliminations)</li>
+                    <li>Arena parking lot is free game, however, due to proximity to staff parking, the front parking lot is a safe zone. Try to get to school early to get a spot!!</li>
+                </ul>
+                <p><strong>Outside School Grounds:</b></p>
+                <ul>
+                    <li>Everything outside the red zone is active play (eliminations allowed)</li>
+                </ul>
+                <p><strong>Exception – School Classes:</b></p>
+                <ul>
+                    <li>If you leave school grounds for a class, you are still safe</li>
+                <p>Upon the request of Mr. Rankin, your water weapons are prohibited on school property, and in your car they must be tucked away. Arena parking lot elimjnations are allowed but you are not allowed to shoot someone in a moving car (not parked) here, unless youre a passenger.</p>
+                </ul>
+            </div>
+        </div>
+
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">7.</span>
+                <span class="title-text">🏢 Personal Safe Zone Rules</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <p><strong>💼 Work (Jobs)</strong></p>
+                <ul>
+                    <li>You are safe while at work</li>
+                    <li>You are safe until you touch your car</li>
+                    <li>Once you touch your car, you are no longer safe</li>
+                </ul>
+                <p><strong>⛪ Religious Places / Events</b></p>
+                <ul>
+                    <li>Same rules as work:
+                        <ul>
+                            <li>Safe while attending</li>
+                            <li>Safe until you touch your car</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p><strong>🏅 Sports/Team Training</b></p>
+                <ul>
+                    <li>When you are actively playing/training in your team sport, you are safe until the game/training session is over.</li>
+                    <li>*Example: If you arrive at volleyball practice, you are safe once you enter the facility, but once you leave, you’re free game.</li>
+                    <li>Safe zones are valid as long as you’re participating in a sport which involves a coach/trainer/instructor.</li>
+                    <li>*For example, if you are simply at the driving range on the golf course with your friends without a coach or instructor, you’re free game.</li>
+                </ul>
+                <p><strong>🏡 People's Houses</b></p>
+                <ul>
+                    <li>You are allowed to lurk around the area, but you are not allowed to break in or enter someone’s house unless you have permission from your target’s family member.</li>
+                    <li>*Example: If your target's parents/siblings allow you into your target’s house, you are allowed to go in and try to eliminate them.</li>
+                    <li>You are also allowed to knock or ring on their front doorbell and if your target answers or you manage to lure them to the front door, you’re allowed to try to eliminate them (without entering the house unless given permission).</li>
+                </ul>
+                <p><strong>Grad Events (suits & dresses)</b></p>
+                <ul>
+                    <li>You have immunity when wearing your grad suit/dress to a grad related event.</li>
+                    <li>*Example: Photoshoots, rehearsals, etc.</li>
+                    <li>PLEASE NOTE: This immunity is only allowed for grad related events! If you wear a suit/dress on any normal day (to a random dinner, date, party, or any normal day activities), you WILL NOT be immune and CAN be eliminated.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">8.</span>
+                <span class="title-text">🗺️ Vacations/Away</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <p>If you are gone for a quick weekend activity, like other normal rounds, you’re fine as long as if your team has eliminated target by the end of the round. If your team has not eliminated a target by the end of the round, then your team is eliminated. Also, your assassins are allowed to travel any distance to get you as you're not on a full vacation.</p>
+                <p>If you are on an actual vacation and are away for longer than a weekend, your partner continues solo and acts as your lifeline.</p>
+                <ul>
+                    <li>If your partner gets out while you’re on vacation, your whole team is out.</li>
+                    <li>If your partner survives while you’re on vacation, you’re allowed to rejoin the team once you’re back in town.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">9.</span>
+                <span class="title-text">🏥 Immunity</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <p>Immunity keeps you from being eliminated; if worn, you cannot be eliminated when shot.</p>
+                <p>Approved immunity items include:</p>
+                <ul>
+                    <li>Water wings/floaties</li>
+                    <li>Goggles</li>
+                    <li>Swim Caps</li>
+                    <li>Life Jakckets</li>
+                </ul>
+                <p>One of these (your choice which one) MUST be visible on your person for full transparency for your assassin (ex. Goggles MUST be on eyes or forehead, 1-2 floaties MUST be visible on your arms (how they're meant to be worn, above the elbow), life jackets must be fully on, swim caps MUST be fully on your head (and not obstructed by hats/hoodies). If you hide immunity items under clothing and are shot, you are in violation of this rule and WILL be eliminated.</p>
+                <p>Immunity items are not able to provide you protection on purge days.</p>
+                <p class="important-note">Immunity CANNOT be active when you are eliminating someone. If you have goggles on your forehead/eyes, life jacket, 1-2 floaties on your arms or swim caps on your head when trying to eliminate a target, it doesn’t count.</p>
+                <p> When eliminating a target, you ARE allowed to have goggles on your neck as they're not active, as well as holding your floaties/life jackets/swim caps.</p>
+                <p> you are NOT allowed to physically touch and remove the immunity from a target."
+            </div>
+        </div>
+
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">10.</span>
+                <span class="title-text">⏰ Game Hours</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <p>Eliminations are allowed 24 hours a day</p>
+            </div>
+        </div>
+
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">11.</span>
+                <span class="title-text">☠ How to Eliminate a Player</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <ul>
+                    <li>You must use an approved method (water hit, etc.)</li>
+                    <li>The elimination must be:
+                        <ul>
+                            <li>Clearly captured on video</li>
+                            <li>Fair</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p>After elimination:</p>
+                <ol>
+                    <li>Upload the video to the Splashin app (plus button at the botton of the screen)</li>
+                    <li>Wait for confirmation from organizers</li>
+                    <li>The eliminated player is out once approved</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">12.</span>
+                <span class="title-text">📱 Reporting Eliminations</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <ul>
+                    <li>All eliminations must be submitted through the Splashin app</li>
+                    <li>Your submission must include:
+                        <ul>
+                            <li>Clear video proof of the elimination</li>
+                            <li>Both players visible if possible</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">13.</span>
+                <span class="title-text">⚠ Rules & Fair Play</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <ul>
+                    <li>No physical harm, harassment, or unsafe behavior</li>
+                    <li>No trespassing on private property unless you have permission from a family member</li>
+                    <li>No damaging property</li>
+                    <li>No abusing safe zones</li>
+                    <li>No puppy guarding the safe zone (waiting outside the safe zone to ambush players immediately as they leave)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">14.</span>
+                <span class="title-text">🚨 Conduct Rules</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <ul>
+                    <li>I will not wear disguises, masks, or conduct myself in a manner that may frighten or otherwise endanger players or members of the public</li>
+                    <li>I will not conduct myself in a manner that has the appearance of a dangerous or illegal activity</li>
+                    <li>I will not engage in any activities that may lead to harm of others, property damage, or public nuisance</li>
+                    <li>I will not engage in any gameplay while in, operating, or near moving vehicles</li>
+                </ul>
+                <p class="important-note">Breaking rules = disqualification</p>
+            </div>
+        </div>
+
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">15.</span>
+                <span class="title-text">❤️ Revives</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <p class="important-note">Only players with their teammate still in the game may claim a revive. Whole team out = fully eliminated.</p>
+                <p><strong>(Normal Revives)</strong> There are a limited number of revives available, and these will be randomly placed at various geographical locations for players to discover and claim.</p>
+                <p><strong>(Paid Revives)</b> However, within the first two weeks of the game, to help ramp up the prize pool, we are offering an expensive choice of a revive for $50. This guarantees you will be back in the game immediately after payment is received. After the first two weeks, these guaranteed revives will no longer be offered as the game narrows down, and and it will not be fair to others.</p>
+                <p>For paid revives only:</p>
+                <ul>
+                    <li>Each player has the opportunity to buy 1 paid revive total for the entire game.</li>
+                    <li>You can only request a paid revive if your teammate is still in the game.</li>
+                    <li>If both teammates are out, your team is fully eliminated (no paid revive allowed).</li>
+                    <li>You must contact organizers for approval before being revived.</li>
+                    <li>Once approved, the player is placed back into the game.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">16.</span>
+                <span class="title-text">🔥 Purge Days</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <ul>
+                    <li>Purge Days are random, 6-hour events announced by the organizers.</li>
+                    <li>Immunity items (floaties, goggles) DO NOT protect you on Purge Days.</li>
+                    <li>Everyone's location will be enabled in the app for full visibility.</li>
+                    <li>If you eliminate anyone during a Purge, you will automatically advance to the next week (meaning your original target is irrelevant for that round).</li>
+                    <li>If you do not eliminate anyone during a Purge, you still have the remainder of the round to eliminate your original target(s).</li>
+                    <li>The player (or team, if applicable) with the most successful eliminations during a single Purge Day will earn immunity for the entire next round.</li>
+                    <li>The start date/time of a Purge may be kept secret by organizers.</li>
+                    <li>All other rules (no trespassing, safety, conduct, etc.) still apply.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">17.</span>
+                <span class="title-text">🏆 Winning</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <p>The last team standing wins and splits the prize pool! (Choose your duo partner wisely, because if they get eliminated and you carry your team to the finish line, you still have to split the prize with them 😉).</p>
+            </div>
+        </div>
+
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">18.</span>
+            <span class="title-text">👑 Admin Win</span>
+            <span class="toggle-icon">+</span>
+        </div>
+        <div class="rule-content">
+            <p>Admins stand to gain nothing personally from this game. If the admin team manages to win the game, 100% of the prize pool will go to charity.</p>
+        </div>
+        </div>
+
+        <div class="rule-item">
+            <div class="rule-header">
+                <span class="number">19.</span>
+                <span class="title-text">📢 Final Notes</span>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="rule-content">
+                <ul>
+                    <li>This is a game — safety and respect come first</li>
+                    <li>Organizers have final say on all decisions</li>
+                </ul>
+            </div>
+        </div>
+
+    </section>
+
+    <section id="feed">
+        <h2>LIVE FROM THE 'GRAM 🔥</h2>
+        <div class="instagram-embed">
+            <!-- Official Instagram Profile Embed -->
+            <iframe src="https://www.instagram.com/chs.srassassin26/embed" 
+                    frameborder="0" 
+                    scrolling="yes" 
+                    allowtransparency="true">
+            </iframe>
+        </div>
+        <p style="text-align:center; margin-top:20px; opacity:0.9;">
+            <a href="https://www.instagram.com/chs.srassassin26/" target="_blank" 
+               style="color:#ffd60a; text-decoration:none; font-weight:bold;">
+                Open full profile on Instagram →
+            </a>
+        </p>
+    </section>
+
+    <footer>
+        <p>Made with 💦🔫 for the CHS Class of 2026</p>
+        <p style="margin-top:10px; opacity:0.8;">Play hard • Stay safe • Have fun!</p>
+        <p class="copyright-text">&copy; chs.fransoo.com a division of fransoo.com by Henry Fransoo</p>
+    </footer>
+
+    <script>
+        // Prize pool animation
+        function animatePrize() {
+            const prizeEl = document.getElementById('prizeAmount');
+            let current = 0;
+            const target = 2600; // Current prize pool total
+            const step = Math.ceil(target / 65); // Adjust step for a smoother animation
+            
+            const timer = setInterval(() => {
+                current += step;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                prizeEl.textContent = '$' + current;
+            }, 28); // Animation speed
         }
-      }, 1500);
-    } else {
-      result.innerHTML = '<p class="error">❌ Wrong! -10% water</p>';
-      updateWater(-10);
-    }
-    return;
-  }
 
-  userAns = parseInt(userAns);
-  if (userAns === correct) {
-    result.innerHTML = '<p class="success">✅ Correct! Moving to next puzzle...</p>';
-    answers[puzzleNum] = correct;
-    input.disabled = true;
-    updateCodeSummary();
-    setTimeout(() => {
-      if (puzzleNum < 5) {
-        document.getElementById('puzzle' + puzzleNum).classList.remove('active');
-        document.getElementById('puzzle' + (puzzleNum + 1)).classList.add('active');
-        currentPuzzle = puzzleNum + 1;
-      } else {
-        document.querySelectorAll('.puzzle').forEach(p => p.style.display = 'none');
-        document.getElementById('winScreen').style.display = 'block';
-      }
-    }, 1500);
-  } else {
-    result.innerHTML = '<p class="error">❌ Wrong! -10% water</p>';
-    updateWater(-10);
-  }
-}
+        // Countdown function 
+        function updateCountdown() {
+            // Set the target date and time to May 4th, 2026, 00:00:00 in UTC-6
+            const startDate = new Date('May 4, 2026 00:00:00 GMT-0600'); 
+            const now = new Date();
+            const timeDifference = startDate - now;
 
-function showHints(num) {
-  const hints = document.getElementById('hints' + num);
-  hints.classList.toggle('show');
-}
+            const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
 
-function showSolution(num) {
-  const sol = document.getElementById('solution' + num);
-  sol.classList.toggle('show');
-}
+            const countdownElement = document.getElementById('countdownTimer');
+            if (countdownElement) {
+                if (timeDifference > 0) {
+                    countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+                } else {
+                    countdownElement.innerHTML = 'GAME HAS BEGUN!';
+                }
+            }
+        }
 
-function updateCodeSummary() {
-  const letters = [
-    answers[1]? 'S' : '?',
-    answers[2]? 'B' : '?',
-    answers[3]? 'S' : '?',
-    answers[4]? 'J' : '?'
-  ];
-  document.getElementById('codeSummary').textContent = `Letters: ${letters.join(' + ')} =?`;
-}
-</script>
+        window.onload = () => {
+            animatePrize(); // Call animation on load
+            
+            updateCountdown(); // Call once immediately to show countdown without delay
+            setInterval(updateCountdown, 1000); // Update countdown every second
+            
+            // Smooth scrolling
+            document.querySelectorAll('nav a[href^="#"]').forEach(link => {
+                link.addEventListener('click', e => {
+                    if (link.getAttribute('href') !== '#') {
+                        e.preventDefault();
+                        document.querySelector(link.getAttribute('href')).scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Accordion functionality for rules
+            const ruleHeaders = document.querySelectorAll('.rule-header');
+            ruleHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const ruleItem = header.closest('.rule-item');
+                    ruleItem.classList.toggle('active');
+                });
+            });
+        };
+    </script>
 </body>
 </html>
