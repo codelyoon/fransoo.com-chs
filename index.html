@@ -49,7 +49,7 @@
     margin-bottom: 20px;
     box-shadow: 0 8px 16px rgba(0,0,0,0.4);
   }
- .pyramid-svg {
+.pyramid-svg {
     width: 100%;
     height: 60px;
     margin-bottom: 10px;
@@ -154,7 +154,6 @@
     transition: all 0.2s;
   }
 .grid-cell:hover { background: #ffeb3b; transform: scale(1.1); }
-.grid-cell.selected { background: #ffeb3b; }
 .code-display {
     font-family: monospace;
     background: #2c1810;
@@ -166,7 +165,7 @@
     letter-spacing: 3px;
     text-align: center;
   }
- .morse-letter {
+.morse-letter {
     display: inline-block;
     margin: 0 8px;
     padding: 5px 10px;
@@ -210,7 +209,7 @@
     <p><a href="/mnt/data/CodeSheet-201912.pdf_-_CodeSheet.pdf" target="_blank">📄 View Code Sheet</a></p>
   </div>
 
-  <!-- Puzzle 1 -->
+  <!-- Puzzle 1: UPDATED - Answer is SPONGEBOB -->
   <div class="puzzle active" id="puzzle1">
     <h2>Puzzle 1: Hieroglyph Cipher 🗿</h2>
     <div class="story">SpongeBob found a wall of numbers in the pyramid. The ghost of King Crab says "Decode my name to proceed!"</div>
@@ -234,7 +233,7 @@
     <div id="result1"></div>
   </div>
 
-  <!-- Puzzle 2 -->
+  <!-- Puzzle 2: UPDATED - Answer is 29119149 -->
   <div class="puzzle" id="puzzle2">
     <h2>Puzzle 2: Sarcophagus NATO Lock ⚔️</h2>
     <div class="story">The sarcophagus only opens with a military call sign. A mummy whispers the full code...</div>
@@ -258,7 +257,7 @@
     <div id="result2"></div>
   </div>
 
-  <!-- Puzzle 3 - UPDATED -->
+  <!-- Puzzle 3: UPDATED - Spaced out Morse, Answer is SEA WATER -->
   <div class="puzzle" id="puzzle3">
     <h2>Puzzle 3: Tomb Tap Code 📡</h2>
     <div class="story">Ancient drums tap out a message. SpongeBob desperately needs this!</div>
@@ -267,7 +266,7 @@
       <span class="morse-letter">...</span>
       <span class="morse-letter">.</span>
       <span class="morse-letter">.-</span>
-      <span style="margin: 0 15px;">/</span>
+      <span style="margin: 0 15px; background: #444;">/</span>
       <span class="morse-letter">.--</span>
       <span class="morse-letter">.-</span>
       <span class="morse-letter">-</span>
@@ -292,14 +291,14 @@
     <div id="result3"></div>
   </div>
 
-  <!-- Puzzle 4 - UPDATED -->
+  <!-- Puzzle 4: UPDATED - Answer is 2 for jellyfish -->
   <div class="puzzle" id="puzzle4">
     <h2>Puzzle 4: Anubis Pattern Lock 🪼</h2>
     <div class="story">Each row/column needs one of each: 🦀 crab=1, 🪼 jellyfish=2, 🍴 spatula=3. Find the missing piece!</div>
     <div class="grid" id="patternGrid">
       <div class="grid-cell">🦀</div><div class="grid-cell">🪼</div><div class="grid-cell">🍴</div>
       <div class="grid-cell">🪼</div><div class="grid-cell">🍴</div><div class="grid-cell">🦀</div>
-      <div class="grid-cell">🍴</div><div class="grid-cell">🦀</div><div class="grid-cell" onclick="selectCell(this)">?</div>
+      <div class="grid-cell">🍴</div><div class="grid-cell">🦀</div><div class="grid-cell">?</div>
     </div>
     <p>What goes in the? spot? Enter: 1 for 🦀, 2 for 🪼, 3 for 🍴</p>
     <div class="input-group">
@@ -319,7 +318,7 @@
     <div id="result4"></div>
   </div>
 
-  <!-- Puzzle 5 - NEW -->
+  <!-- Puzzle 5: NEW - Word puzzle using first letters -->
   <div class="puzzle" id="puzzle5">
     <h2>Puzzle 5: Pharaoh's Word Lock 👑</h2>
     <div class="story">The final door needs a 4-letter word. Use the FIRST LETTER of each previous answer!</div>
@@ -424,11 +423,13 @@ function checkAnswer(puzzleNum, correct) {
 }
 
 function showHints(num) {
-  document.getElementById('hints' + num).classList.toggle('show');
+  const hints = document.getElementById('hints' + num);
+  hints.classList.toggle('show');
 }
 
 function showSolution(num) {
-  document.getElementById('solution' + num).classList.toggle('show');
+  const sol = document.getElementById('solution' + num);
+  sol.classList.toggle('show');
 }
 
 function updateCodeSummary() {
@@ -439,13 +440,6 @@ function updateCodeSummary() {
     answers[4]? 'J' : '?'
   ];
   document.getElementById('codeSummary').textContent = `Letters: ${letters.join(' + ')} =?`;
-}
-
-function selectCell(cell) {
-  const choice = prompt('Enter: 1 for 🦀, 2 for 🪼, 3 for 🍴');
-  if (choice === '1') cell.textContent = '🦀';
-  if (choice === '2') cell.textContent = '🪼';
-  if (choice === '3') cell.textContent = '🍴';
 }
 </script>
 </body>
